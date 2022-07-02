@@ -1,0 +1,288 @@
+/** Basic */
+*
+{
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+}
+
+body
+{
+    background: url( '../images/bg-stars-2560.jpg' ) center top repeat-y #000000;
+    font-family: Arial, sans-serif;
+    color:#efefef;
+
+    padding:10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a 
+{
+    color: #188bdf;
+}
+
+/** Wrapper */
+#calculator
+{
+    display: block;
+
+    max-width: 540px;
+}
+
+/** Headline */
+.headline
+{
+    padding-bottom: 5px;
+    margin-bottom:10px;
+
+    border-bottom:1px solid #efefef;
+
+    text-align: center;
+}
+
+/** Grid Style */
+.calculator-grid,
+#calculator-materials > .material
+{
+    display: grid;
+
+    grid-template-columns: auto 140px;
+    grid-gap: 5px;
+
+    background-color: rgba(141, 180, 224, 0.2);
+
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.grid-element.full
+{
+    grid-column: 1 / 3;
+}
+
+/** Inputs */
+input,
+select
+{
+    font-family: 'Font Awesome 5 Free', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.icon-input
+{
+    position: relative;
+}
+
+.icon-input input,
+.icon-input select
+{
+    width: 100%;
+    height: 40px;
+
+    padding-left: 42px;
+    padding-right: 5px;
+
+    font-size: 16px;
+
+    border: 1px solid #0a5688;
+    border-radius: 0;
+}
+
+.icon-input.with-unit input
+{
+    padding-right: 42px;
+}
+
+.icon-input i
+{
+    position: absolute;
+    left: 1px;
+    top:1px;
+
+    width: 38px;
+    height: 38px;
+
+    padding:9px;
+
+    background-color: #05263E;
+    color:#ffffff;
+
+    font-style: normal;
+    font-size: 20px;
+
+    text-align: center;
+}
+
+.icon-input.with-unit .unit
+{
+    left: auto;
+    right: 1px;
+
+    font-size: 18px;
+    text-align: center;
+}
+
+.icon-input.with-unit .unit.small
+{
+    font-size: 9px;
+    line-height: 20px;
+}
+
+input[disabled],
+select[disabled]
+{
+    color: #000000;
+    opacity: 1;
+}
+
+input[readonly]
+{
+    background-color: #20577a;
+    color: #ffffff;
+}
+
+input[readonly]::placeholder
+{
+    color: white;
+    opacity: 1;
+}
+
+/** Buttons */
+.button
+{
+    position: relative;
+
+    cursor: pointer;
+
+    opacity: 0.9;
+}
+
+.button:hover
+{
+    opacity: 1;
+}
+
+.button.with-icon i
+{
+    position: absolute;
+    left: 1px;
+    top:1px;
+
+    width: 38px;
+    height: 38px;
+
+    padding:9px;
+
+    background-color: #05263E;
+    color:#ffffff;
+
+    font-style: normal;
+    font-size: 20px;
+
+    text-align: center;
+}
+
+.button div
+{
+    width: 100%;
+    height: 40px;
+
+    padding:8px 8px 8px 42px;
+
+    border: 1px solid rgba(12,90,147,1);
+
+    background: linear-gradient(0deg, rgba(5,38,62,1) 0%, rgba(12,90,147,1) 100%);
+    color: #ffffff;
+
+    font-size: 20px;
+
+    text-align: center;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.button.finish.with-icon i
+{
+    position: absolute;
+    left: 1px;
+    top:1px;
+
+    width: 38px;
+    height: 38px;
+
+    padding:9px;
+
+    background-color: rgba(2,87,0,1);
+    color:#ffffff;
+
+    font-style: normal;
+    font-size: 20px;
+
+    text-align: center;
+}
+
+.button.finish div
+{
+    background: linear-gradient(0deg, rgba(2,87,0,1) 0%, rgba(0,195,9,1) 100%);
+
+    border: 1px solid rgba(0,195,9,1);
+}
+
+.button.delete.with-icon i
+{
+    position: absolute;
+    left: 1px;
+    top:1px;
+
+    width: 38px;
+    height: 38px;
+
+    padding:9px;
+
+    background-color: rgb(87, 0, 0);
+    color:#ffffff;
+
+    font-style: normal;
+    font-size: 20px;
+
+    text-align: center;
+}
+
+.button.delete div
+{
+    background: linear-gradient(0deg, rgb(87, 0, 0) 0%, rgb(195, 0, 0) 100%);
+
+    border: 1px solid rgb(195, 0, 0);
+}
+
+/* Copyright */
+#calculator-copyright
+{
+    font-size: 0.75em;
+}
+
+/* Footer Logos */
+#footer-logos
+{
+    display: block;
+    
+    width: 100%;
+
+    margin-top: 10px;
+
+    text-align: center;
+}
+
+#footer-logos > div.logo
+{
+    display: inline-block;
+
+    opacity: 0.5;
+}
