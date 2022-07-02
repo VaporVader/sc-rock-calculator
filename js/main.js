@@ -7,7 +7,7 @@ document.addEventListener( 'DOMContentLoaded', function()
 // when window is loaded
 window.addEventListener( 'load', function()
 {
-   // do something
+    this.document.querySelector( '#calculator' ).style.display = '';
 });
 
 /**
@@ -24,11 +24,6 @@ function calculate()
  */
 function addNewMaterial( material )
 {
-    if( material === undefined )
-    {
-        material = 'Inert';
-    }
-
     RockCalculator.addNewMaterial( material );
 }
 
