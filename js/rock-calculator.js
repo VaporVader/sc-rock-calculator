@@ -1,6 +1,6 @@
 let RockCalculator = 
 {
-    materialRenderArea      : null,
+    materialsRenderArea     : null,
     materialTemplate        : null,
     rockMassElement         : null,
     rockValueElement        : null,
@@ -11,6 +11,9 @@ let RockCalculator =
 
     materials: null,
     rockTypes: null,
+
+    selectableMaterials     : [],
+    selectedRockTypePreset  : null,
 
     /**
      * Init function to set start values for Calculator.
@@ -32,6 +35,7 @@ let RockCalculator =
         this._initRockTypeSelectionList();
         this._initMaterialSelectionList();
         this._initInputChangeHandler();
+        this._setSelectableMaterials();
 
         // add first material, default = Inert
         this.addNewMaterial();
@@ -109,6 +113,7 @@ let RockCalculator =
             if( event.target.matches( 'input, select' ) )
             {
                 calculatorInstance.calculate();
+                calculatorInstance._setSelectableMaterials();
             }
         });
 
@@ -117,8 +122,77 @@ let RockCalculator =
             if( event.target.matches( 'input, select' ) )
             {
                 calculatorInstance.calculate();
+                calculatorInstance._setSelectableMaterials();
             }
         });
+    },
+
+    /**
+     * Store current selected materials
+     * and disable material options for every material select that are currently selected at other selects.
+     * @private
+     */
+    _setSelectableMaterials: function()
+    {
+        let currentSelectedMaterials    = [];
+        this.selectableMaterials        = [];
+
+        for( let materialName in this.materials )
+        {
+            this.selectableMaterials.push( materialName );
+        }
+
+        let materialSelectElements = this.materialsRenderArea.querySelectorAll( 'div.material select[name="rockContent"]' );
+
+        // get all selected materials as array
+        materialSelectElements.forEach( ( materialSelectElement ) =>
+        {
+            currentSelectedMaterials.push( materialSelectElement.value );
+
+            // remove selected materials from selectable list
+            for( let i = 0; i < this.selectableMaterials.length; i++ )
+            {
+                let selectableMaterial = this.selectableMaterials[ i ];
+
+                if( selectableMaterial === materialSelectElement.value )
+                {
+                    this.selectableMaterials.splice( i, 1 );
+                }
+            }
+        });
+
+        // disable options that are currently selected from other material selects
+        materialSelectElements.forEach( ( materialSelectElement ) =>
+        {
+            let optionElements = materialSelectElement.querySelectorAll( 'option' );
+
+            optionElements.forEach( ( optionElement ) => 
+            {
+                if( currentSelectedMaterials.includes( optionElement.value ) && optionElement.value !== materialSelectElement.value )
+                {
+                    optionElement.setAttribute( 'disabled', 'disabled' );
+                }
+                else
+                {
+                    optionElement.removeAttribute( 'disabled' );
+                }
+            });
+        });
+
+        // when no selectable materials left, then hide "add new material" button,
+        // otherwise show it,
+        // but only when no preset is loaded, then this button is always hidden.
+        if( this.selectedRockTypePreset === null )
+        {
+            if( this.selectableMaterials.length === 0 )
+            {
+                this.addNewMaterialElement.style.display = 'none';
+            }
+            else
+            {
+                this.addNewMaterialElement.style.display = '';
+            }
+        }
     },
 
     /**
@@ -130,16 +204,22 @@ let RockCalculator =
         let rockTypeData    = this.getRockTypeDataByName( rockType );
 
         this.materialsRenderArea.innerHTML = '';
+        this.selectedRockTypePreset = null;
+
+        this._setSelectableMaterials();
 
         // no rock type data found, then dont try to load a preset.
+        // only show defaul with Inert as star material.
         if( rockTypeData === null )
         {
             this.addNewMaterialElement.style.display = '';
+            this.addNewMaterial();
 
             return;
         }
 
         this.addNewMaterialElement.style.display = 'none';
+        this.selectedRockTypePreset = rockType;
 
         // create preset from rock type content
         for( let materialName in rockTypeData.content )
@@ -222,9 +302,21 @@ let RockCalculator =
      */
     addNewMaterial: function( material, changeable )
     {
+        // when no selectable materials left, then exit.
+        if( this.selectableMaterials.length === 0 )
+        {
+            return;
+        }
+
         if( material === undefined )
         {
-            material = 'Inert';
+            material = this.selectableMaterials[ this.selectableMaterials.length - 1 ];
+
+            // when material was not found, then exit.
+            if( material === undefined )
+            {
+                return;
+            }
         }
 
         if( changeable === undefined )
@@ -258,6 +350,8 @@ let RockCalculator =
 
         this.materialsRenderArea.append( newMaterialElement );
         this.materialsRenderArea.style.display = '';
+
+        this._setSelectableMaterials();
     },
 
     /**
@@ -270,6 +364,8 @@ let RockCalculator =
         materialElement.remove();
 
         this.calculate();
+
+        this._setSelectableMaterials();
     },
 
     /**
@@ -288,6 +384,8 @@ let RockCalculator =
         this.rockTypeElement.value = '';
 
         this.addNewMaterialElement.style.display = '';
+
+        this._setSelectableMaterials();
 
         // add first material, default = Inert
         this.addNewMaterial();
