@@ -115,6 +115,11 @@ let RockCalculator =
                 calculatorInstance.calculate();
                 calculatorInstance._setSelectableMaterials();
             }
+
+            if( event.target.matches( 'input[name="rockContentPercentage"]' ) )
+            {
+                calculatorInstance._checkMaterialsPercentage( event.target );
+            }
         });
 
         document.addEventListener( 'keyup', ( event ) =>
@@ -124,7 +129,46 @@ let RockCalculator =
                 calculatorInstance.calculate();
                 calculatorInstance._setSelectableMaterials();
             }
+
+            if( event.target.matches( 'input[name="rockContentPercentage"]' ) )
+            {
+                calculatorInstance._checkMaterialsPercentage( event.target );
+            }
         });
+    },
+
+    /**
+     * Check that the sums of the material percentages not exceed 100%.
+     * Also checks that an entered percentage cannot be negative.
+     * @param {Object} changedPercentageElement
+     * @private
+     */
+    _checkMaterialsPercentage: function( changedPercentageElement )
+    {
+        // check that entered percentage is not negative, then set to 0
+        if( parseFloat( changedPercentageElement.value ) < 0 )
+        {
+            changedPercentageElement.value = 0;
+
+            this.calculate();
+        }
+
+        let materialsPercentage = 0;
+        let materialsPercentageElements = this.materialsRenderArea.querySelectorAll( 'div.material input[name="rockContentPercentage"]' );
+
+        // get current materials percentage
+        materialsPercentageElements.forEach( ( materialsPercentageElement ) =>
+        {
+            materialsPercentage += parseFloat( materialsPercentageElement.value );
+        });
+
+        // when exceeding, then limit changed percentage element to max value that not exceeds.
+        if( materialsPercentage > 100 )
+        {
+            changedPercentageElement.value = changedPercentageElement.value - ( materialsPercentage - 100 );
+
+            this.calculate();
+        }
     },
 
     /**
