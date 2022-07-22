@@ -1,13 +1,16 @@
 let RockCalculator = 
 {
-    materialsRenderArea     : null,
-    materialTemplate        : null,
-    rockMassElement         : null,
-    rockValueElement        : null,
-    rockScuElement          : null,
-    rockValueScuElement     : null,
-    rockTypeElement         : null,
-    addNewMaterialElement   : null,
+    materialsRenderArea         : null,
+    materialTemplate            : null,
+    rockMassElement             : null,
+    rockValueElement            : null,
+    rockScuElement              : null,
+    rockValueScuElement         : null,
+    rockTypeElement             : null,
+    addNewMaterialElement       : null,
+    rockTypeOverviewRenderArea  : null,
+    rockTypeTemplate            : null,
+    rockTypeContentEntryTemplate: null,
 
     materials: null,
     rockTypes: null,
@@ -15,19 +18,26 @@ let RockCalculator =
     selectableMaterials     : [],
     selectedRockTypePreset  : null,
 
+    rockTypeInfoVisible: false,
+
+    rockTypeImagePath: 'images/rock-types/',
+
     /**
      * Init function to set start values for Calculator.
      */
     init: function( materials, rockTypes )
     {
-        this.materialsRenderArea    = document.querySelector( '#calculator-materials' );
-        this.materialTemplate       = document.querySelector( '#rockContentTemplate' );
-        this.rockMassElement        = document.querySelector( '#rockMass' );
-        this.rockValueElement       = document.querySelector( '#rockValue' );
-        this.rockScuElement         = document.querySelector( '#rockSCU' );
-        this.rockValueScuElement    = document.querySelector( '#rockValueSCU' );
-        this.rockTypeElement        = document.querySelector( '#rockType' );
-        this.addNewMaterialElement  = document.querySelector( '#calculator-add-material' );
+        this.materialsRenderArea            = document.querySelector( '#calculator-materials' );
+        this.materialTemplate               = document.querySelector( '#rockContentTemplate' );
+        this.rockMassElement                = document.querySelector( '#rockMass' );
+        this.rockValueElement               = document.querySelector( '#rockValue' );
+        this.rockScuElement                 = document.querySelector( '#rockSCU' );
+        this.rockValueScuElement            = document.querySelector( '#rockValueSCU' );
+        this.rockTypeElement                = document.querySelector( '#rockType' );
+        this.addNewMaterialElement          = document.querySelector( '#calculator-add-material' );
+        this.rockTypeOverviewRenderArea     = document.querySelector( '#calculator-rock-type-overview' );
+        this.rockTypeTemplate               = document.querySelector( '#rockTypeTemplate' );
+        this.rockTypeContentEntryTemplate   = document.querySelector( '#rockTypeContentEntryTemplate' );
 
         this.materials = materials;
         this.rockTypes = rockTypes;
@@ -252,6 +262,12 @@ let RockCalculator =
 
         this._setSelectableMaterials();
 
+        // when rock type info is visible, then refresh this info
+        if( this.rockTypeInfoVisible )
+        {
+            this.showSelectedRockTypeInfo();
+        }
+
         // no rock type data found, then dont try to load a preset.
         // only show defaul with Inert as star material.
         if( rockTypeData === null )
@@ -300,6 +316,90 @@ let RockCalculator =
         }
 
         return rockTypeData;
+    },
+
+    /**
+     * Close the info card for current selected rock type.
+     */
+    closeRockTypeInfo: function()
+    {
+        this.rockTypeOverviewRenderArea.style.display = 'none';
+
+        // clear current content from render area
+        this.rockTypeOverviewRenderArea.innerHTML = '';
+
+        this.rockTypeInfoVisible = false;
+    },
+
+    /**
+     * Show the info card for current selected rock type.
+     */
+    showSelectedRockTypeInfo: function()
+    {
+        let rockType        = this.rockTypeElement.value;
+        let rockTypeData    = this.getRockTypeDataByName( rockType );
+
+        // if no rock type data found, then nothing to show
+        if( rockTypeData === null )
+        {
+            this.rockTypeOverviewRenderArea.style.display = 'none';
+            this.rockTypeInfoVisible = false;
+
+            return;
+        }
+
+        // creat new info entry from template
+        let newRockTypeInfoElement = this.rockTypeTemplate.content.cloneNode( true );
+
+        // add rock type data to info element
+        let headlineElement         = newRockTypeInfoElement.querySelector( '.headline' );
+        let rockTypeImageElement    = newRockTypeInfoElement.querySelector( '.rock-type-image img' );
+        let rockTypeContentElement  = newRockTypeInfoElement.querySelector( '.rock-type-content' );
+
+        headlineElement.textContent = rockTypeData.name;
+        rockTypeImageElement.src    = this.rockTypeImagePath + rockTypeData.image;
+
+        // add rock type content
+        for( let materialName in rockTypeData.content )
+        {
+            let rockTypeMaterialData        = rockTypeData.content[ materialName ];
+            let newRockTypeContentElement   = this.rockTypeContentEntryTemplate.content.cloneNode( true );
+
+            // get basic material data
+            let basicMaterialData   = this.materials[ materialName ];
+            let materialPricePerSCU = Math.round( basicMaterialData.price.refined * 100 );
+
+            // add material data
+            let materialTextElement    = newRockTypeContentElement.querySelector( '.material-text' );
+            let barFillElement         = newRockTypeContentElement.querySelector( '.bar .fill' );
+            let barMinMaxTextElement   = newRockTypeContentElement.querySelector( '.bar .min-max-text' );
+
+            materialTextElement.textContent = materialName + ': ' + materialPricePerSCU + ' aUEC / SCU';
+
+            let barFillWidth = rockTypeMaterialData.max - rockTypeMaterialData.min;
+
+            barFillElement.style[ 'margin-left' ]   = rockTypeMaterialData.min + '%';
+            barFillElement.style[ 'width' ]         = barFillWidth + '%';
+
+            let minMaxTextElementLeftPos = barFillWidth + rockTypeMaterialData.min + 2;
+
+            barMinMaxTextElement.style[ 'left' ]    = minMaxTextElementLeftPos + '%';
+            barMinMaxTextElement.textContent        = rockTypeMaterialData.min + ' - ' + rockTypeMaterialData.max + ' %';
+
+            // append material data to rock type content element
+            rockTypeContentElement.append( newRockTypeContentElement );
+        }
+
+        // clear current content from render area
+        this.rockTypeOverviewRenderArea.innerHTML = '';
+
+        // append new info element
+        this.rockTypeOverviewRenderArea.append( newRockTypeInfoElement );
+
+        // show render area for overview cards
+        this.rockTypeOverviewRenderArea.style.display = '';
+
+        this.rockTypeInfoVisible = true;
     },
 
     /**

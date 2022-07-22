@@ -53,3 +53,19 @@ function deleteMaterial( deleteButtonElement )
 
     RockCalculator.deleteMaterial( materialElement );
 }
+
+/**
+ * Show the info card for current selected rock type.
+ */
+function showSelectedRockTypeInfo()
+{
+    RockCalculator.showSelectedRockTypeInfo();
+}
+
+/**
+ * Close the info card for current selected rock type.
+ */
+ function closeRockTypeInfo()
+ {
+     RockCalculator.closeRockTypeInfo();
+ }

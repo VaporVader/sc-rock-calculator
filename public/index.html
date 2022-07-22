@@ -27,72 +27,82 @@
                 <img src="images/logo-default.png" alt="" />
             </div>
 
-            <div id="calculator-rock-type" class="calculator-grid">
-                <div class="grid-element full">
-                    <div class="icon-input with-unit">
-                        <select id="rockType" name="rockType" onchange="loadRockTypePreset();"></select>
-                        <i class="fa fa-gem" aria-hidden="true"></i>
+            <div id="calculator-mask">
+                <div id="calculator-rock-type" class="calculator-grid with-additional-side-button">
+                    <div class="grid-element">
+                        <div class="icon-input with-unit">
+                            <select id="rockType" name="rockType" onchange="loadRockTypePreset();"></select>
+                            <i class="fa fa-gem" aria-hidden="true"></i>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div id="calculator-rock" class="calculator-grid">
-                <div class="grid-element">
-                    <div class="icon-input with-unit">
-                        <input id="rockMass" name="rockMass" type="number" min="0" placeholder="Mass" />
-                        <i class="fa fa-weight-hanging" aria-hidden="true"></i>
-                        <i class="unit" aria-hidden="true">kg</i>
-                    </div>
-                </div>
-
-                <div class="grid-element">
-                    <div class="icon-input with-unit">
-                        <input id="rockSCU" name="rockSCU" type="text" placeholder="---" readonly disabled />
-                        <i class="fa fa-th" aria-hidden="true"></i>
-                        <i class="unit small" aria-hidden="true">SCU</i>
+                    <div class="grid-element">
+                        <div class="button only-icon" onclick="showSelectedRockTypeInfo();">
+                            <i class="far fa-eye" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid-element">
-                    <div class="icon-input with-unit">
-                        <input id="rockValue" name="rockValue" type="text" placeholder="------" readonly disabled />
-                        <i class="fa fa-dollar-sign" aria-hidden="true"></i>
-                        <i class="unit small" aria-hidden="true">aUEC</i>
+                <div id="calculator-rock-type-overview" style="display: none;"><!-- ROCK TYPE OVERVIEW RENDER AREA --></div>
+    
+                <div id="calculator-rock" class="calculator-grid">
+                    <div class="grid-element">
+                        <div class="icon-input with-unit">
+                            <input id="rockMass" name="rockMass" type="number" min="0" placeholder="Mass" />
+                            <i class="fa fa-weight-hanging" aria-hidden="true"></i>
+                            <i class="unit" aria-hidden="true">kg</i>
+                        </div>
+                    </div>
+    
+                    <div class="grid-element">
+                        <div class="icon-input with-unit">
+                            <input id="rockSCU" name="rockSCU" type="text" placeholder="---" readonly disabled />
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <i class="unit small" aria-hidden="true">SCU</i>
+                        </div>
+                    </div>
+    
+                    <div class="grid-element">
+                        <div class="icon-input with-unit">
+                            <input id="rockValue" name="rockValue" type="text" placeholder="------" readonly disabled />
+                            <i class="fa fa-dollar-sign" aria-hidden="true"></i>
+                            <i class="unit small" aria-hidden="true">aUEC</i>
+                        </div>
+                    </div>
+    
+                    <div class="grid-element">
+                        <div class="icon-input with-unit">
+                            <input id="rockValueSCU" name="rockValueSCU" type="text" placeholder="---" readonly disabled />
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <i class="unit small" aria-hidden="true">SCU</i>
+                        </div>
                     </div>
                 </div>
-
-                <div class="grid-element">
-                    <div class="icon-input with-unit">
-                        <input id="rockValueSCU" name="rockValueSCU" type="text" placeholder="---" readonly disabled />
-                        <i class="fa fa-th" aria-hidden="true"></i>
-                        <i class="unit small" aria-hidden="true">SCU</i>
+    
+                <div id="calculator-materials" style="display:none;"><!-- MATERIAL RENDER AREA --></div>
+    
+                <div id="calculator-add-material" class="calculator-grid">
+                    <div class="grid-element full">
+                        <div class="button with-icon" onclick="addNewMaterial();">
+                            <div>Add new material</div>
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div id="calculator-materials" style="display:none;"><!-- MATERIAL RENDER AREA --></div>
-
-            <div id="calculator-add-material" class="calculator-grid">
-                <div class="grid-element full">
-                    <div class="button with-icon" onclick="addNewMaterial();">
-                        <div>Add new material</div>
-                        <i class="fa fa-plus" aria-hidden="true"></i>
+    
+                <div id="calculator-calculate" class="calculator-grid">
+                    <div class="grid-element full">
+                        <div class="button finish with-icon" onclick="calculate();">
+                            <div>Calculate values</div>
+                            <i class="fa fa-calculator" aria-hidden="true"></i>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div id="calculator-calculate" class="calculator-grid">
-                <div class="grid-element full">
-                    <div class="button finish with-icon" onclick="calculate();">
-                        <div>Calculate values</div>
-                        <i class="fa fa-calculator" aria-hidden="true"></i>
-                    </div>
-                </div>
-
-                <div class="grid-element full">
-                    <div class="button with-icon" onclick="resetCalculator();">
-                        <div>Start new input</div>
-                        <i class="fa fa-sync" aria-hidden="true"></i>
+    
+                    <div class="grid-element full">
+                        <div class="button with-icon" onclick="resetCalculator();">
+                            <div>Start new input</div>
+                            <i class="fa fa-sync" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,7 +126,7 @@
             </div>
 
             <template id="rockContentTemplate">
-                <div class="material">
+                <div class="material calculator-grid">
                     <div class="grid-element">
                         <div class="icon-input">
                             <select name="rockContent"></select>
@@ -153,6 +163,44 @@
                             <div>Delete material</div>
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </div>
+                    </div>
+                </div>
+            </template>
+
+            <template id="rockTypeTemplate">
+                <div class="rock-type-entry">
+                    <div class="headline"><!-- ROCK TYPE NAME --></div>
+
+                    <div class="info-grid">
+                        <div class="rock-type-image grid-element">
+                            <img src="" />
+                        </div>
+    
+                        <div class="rock-type-content grid-element"><!-- ROCK TYPE CONTENT --></div>
+
+                        <div class="rock-type-select-button grid-element full">
+                            <div class="button with-icon" onclick="closeRockTypeInfo();">
+                                <div>Close overview</div>
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                        <div class="rock-type-select-button grid-element full" style="display: none;">
+                            <div class="button with-icon" onclick="">
+                                <div>Select rock type</div>
+                                <i class="fa fa-gem" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template id="rockTypeContentEntryTemplate">
+                <div class="rock-content-entry">
+                    <div class="material-text"><!-- ROCK CONTENT ENTRY NAME / PRICE -->></div>
+                    <div class="bar">
+                        <div class="fill" style="width: 0%; margin-left: 0%;"></div>
+                        <div class="min-max-text" style="left: 0%;"><!-- ROCK CONTENT ENTRY MIN / MAX --></div>
                     </div>
                 </div>
             </template>

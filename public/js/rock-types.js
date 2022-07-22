@@ -1,7 +1,7 @@
 let rockTypes = {
    Asteroids: [
       {
-         name: 'C-Type',
+         name: 'C-Type Asteroid',
          content: {
             'Aluminium': {
                min: 2.0,
@@ -15,10 +15,11 @@ let rockTypes = {
                min: 1.0,
                max: 20.0
             }
-         }
+         },
+         image: 'asteroid-ctype.png'
       },
       {
-         name: 'E-Type',
+         name: 'E-Type Asteroid',
          content: {
             'Borase': {
                min: 1.2,
@@ -36,10 +37,11 @@ let rockTypes = {
                min: 2.0,
                max: 20.0
             }
-         }
+         },
+         image: 'asteroid-etype.png'
       },
       {
-         name: 'M-Type',
+         name: 'M-Type Asteroid',
          content: {
             'Hephaestanite': {
                min: 1.1,
@@ -53,10 +55,11 @@ let rockTypes = {
                min: 3.0,
                max: 45.0
             }
-         }
+         },
+         image: 'asteroid-mtype.png'
       },
       {
-         name: 'P-Type',
+         name: 'P-Type Asteroid',
          content: {
             'Aluminium': {
                min: 3.0,
@@ -78,10 +81,11 @@ let rockTypes = {
                min: 5.0,
                max: 30.0
             }
-         }
+         },
+         image: 'asteroid-ptype.png'
       },
       {
-         name: 'Q-Type',
+         name: 'Q-Type Asteroid',
          content: {
             'Beryl': {
                min: 1.5,
@@ -99,10 +103,11 @@ let rockTypes = {
                min: 20.0,
                max: 40.0
             }
-         }
+         },
+         image: 'asteroid-qtype.png'
       },
       {
-         name: 'S-Type',
+         name: 'S-Type Asteroid',
          content: {
             'Borase': {
                min: 1.0,
@@ -116,7 +121,8 @@ let rockTypes = {
                min: 1.0,
                max: 30.0
             }
-         }
+         },
+         image: 'asteroid-stype.png'
       }
    ],
    Deposits: [
@@ -143,7 +149,8 @@ let rockTypes = {
                min: 1.16,
                max: 20.0
             }
-         }
+         },
+         image: 'atacamite.png'
       },
       {
          name: 'Felsic Deposit',
@@ -168,7 +175,8 @@ let rockTypes = {
                min: 1.16,
                max: 20.0
             }
-         }
+         },
+         image: 'felsic.png'
       },
       {
          name: 'Gneiss Deposit',
@@ -197,7 +205,8 @@ let rockTypes = {
                min: 2.0,
                max: 40.0
             }
-         }
+         },
+         image: 'gneiss.png'
       },
       {
          name: 'Granite Deposit',
@@ -226,7 +235,8 @@ let rockTypes = {
                min: 3.0,
                max: 45.0
             }
-         }
+         },
+         image: 'granite.png'
       },
       {
          name: 'Igneous Deposit',
@@ -251,7 +261,8 @@ let rockTypes = {
                min: 3.0,
                max: 40.0
             }
-         }
+         },
+         image: 'igneous.png'
       },
       {
          name: 'Obsidian Deposit',
@@ -276,7 +287,8 @@ let rockTypes = {
                min: 3.0,
                max: 30.0
             }
-         }
+         },
+         image: 'obsidian.png'
       },
       {
          name: 'Quantanium Deposit',
@@ -301,7 +313,8 @@ let rockTypes = {
                min: 20.0,
                max: 60.0
             }
-         }
+         },
+         image: 'quantanium.png'
       },
       {
          name: 'Quartzite Deposit',
@@ -330,7 +343,8 @@ let rockTypes = {
                min: 1.0,
                max: 15.0
             }
-         }
+         },
+         image: 'quartzite.png'
       },
       {
          name: 'Shale Deposit',
@@ -355,7 +369,8 @@ let rockTypes = {
                min: 2.0,
                max: 35.0
             }
-         }
+         },
+         image: 'shale.png'
       }
    ]
 };
