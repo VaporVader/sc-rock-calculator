@@ -339,7 +339,8 @@ let RockCalculator =
         let rockType        = this.rockTypeElement.value;
         let rockTypeData    = this.getRockTypeDataByName( rockType );
 
-        // if no rock type data found, then nothing to show
+        // if no rock type data found, then nothing to show,
+        // and hide current overview page
         if( rockTypeData === null )
         {
             this.rockTypeOverviewRenderArea.style.display = 'none';
@@ -530,6 +531,12 @@ let RockCalculator =
         this.addNewMaterialElement.style.display = '';
 
         this._setSelectableMaterials();
+
+        // when rock type info is visible, then refresh this info
+        if( this.rockTypeInfoVisible )
+        {
+            this.showSelectedRockTypeInfo();
+        }
 
         // add first material, default = Inert
         this.addNewMaterial();
