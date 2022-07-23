@@ -1,3 +1,5 @@
+let appInstallContainer = null;
+
 // when document is ready
 document.addEventListener( 'DOMContentLoaded', function()
 {
@@ -8,7 +10,59 @@ document.addEventListener( 'DOMContentLoaded', function()
 window.addEventListener( 'load', function()
 {
     this.document.querySelector( '#calculator' ).style.display = '';
+
+    // register service worker for PWA handling.
+    if( 'serviceWorker' in navigator ) 
+    {
+        navigator.serviceWorker.register( '/service-worker.js' );
+    }
+
+    // init app install handling over button.
+    appInstallContainer = document.querySelector( '#app-install-text' );
+
+    appInstallContainer.querySelector( '.link' ).addEventListener( 'click', async () => {
+        hideAppInstall();
+
+        // show install prompt.
+        installPrompt.prompt();
+
+        // Wait for the user to respond to the prompt
+        const { outcome } = await installPrompt.userChoice;
+
+        // We've used the prompt, and can't use it again, throw it away.
+        installPrompt = null;
+    });
 });
+
+
+let installPrompt;
+
+window.addEventListener( 'beforeinstallprompt', ( event ) => {
+  // Prevent the mini-infobar from appearing on mobile
+  // event.preventDefault();
+
+  // Stash the event so it can be triggered later.
+  installPrompt = event;
+
+  // Update UI notify the user they can install the app
+  showAppInstall();
+});
+
+/**
+ * Show app install container.
+ */
+function showAppInstall()
+{
+    appInstallContainer.style.display = '';
+}
+
+/**
+ * Hide app install container.
+ */
+ function hideAppInstall()
+ {
+    appInstallContainer.style.display = 'none';
+ }
 
 /**
  * Calculate the user inputs and show the values at the calculator.

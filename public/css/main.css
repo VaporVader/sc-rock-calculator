@@ -20,9 +20,13 @@ body
     justify-content: center;
 }
 
-a 
+a,
+span.link
 {
     color: #188bdf;
+    text-decoration: underline;
+
+    cursor: pointer;
 }
 
 /** Wrapper */
