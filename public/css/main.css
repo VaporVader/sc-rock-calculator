@@ -324,7 +324,7 @@ input[readonly]::placeholder
 {
     display: grid;
 
-    grid-template-columns: 150px auto;
+    grid-template-columns: 140px auto;
     grid-gap: 5px;
 
     background-color: rgba(0,0,0,0.3);
@@ -373,7 +373,7 @@ input[readonly]::placeholder
 {
     font-size: 12px;
 
-    padding: 3px 3px 3px 10px;
+    padding: 3px 3px 3px 6px;
 
     background-color: #05263E;
 
@@ -396,9 +396,6 @@ input[readonly]::placeholder
     text-align: center;
 
     background-color: rgb(44 56 64);
-
-    -webkit-box-shadow: inset 0 1px 2px rgba( 0, 0, 0, .1 );
-    box-shadow: inset 0 1px 2px rgba( 0, 0, 0, .1);
 }
 
 #calculator-rock-type-overview .rock-content-entry .bar .fill
@@ -411,10 +408,7 @@ input[readonly]::placeholder
     border-left: 5px solid #cc0000;
     border-right: 5px solid #00cc00;
 
-    background: linear-gradient(90deg, rgba(5,38,62,1) 0%, rgba(12,90,147,1) 50%, rgba(5,38,62,1) 100%);
-
-    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    background-color: rgba(12,90,147,0.8);
 }
 
 #calculator-rock-type-overview .rock-content-entry .bar .min-max-text
