@@ -1,0 +1,22 @@
+{
+    "name": "Star Citizen Rock Mining Calculator",
+    "short_name": "SC Rock Mining Calculator",
+    "description": "A Star Citizen Rock Mining Calculator",
+    "theme_color": "#0c5a92",
+    "background_color": "#05273f",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+          "src": "/images/icons/icon-512x512.png",
+          "type": "image/png", "sizes": "512x512",
+          "purpose": "any"
+        },
+        {
+          "src": "/images/icons/icon-maskable-512x512.png",
+          "type": "image/png", "sizes": "512x512",
+          "purpose": "maskable"
+        }
+      ]
+  }
