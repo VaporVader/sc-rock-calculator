@@ -7,15 +7,17 @@
 
         <title>Star Citizen Rock Mining Calculator</title>
         <meta name="description" content="A Star Citizen Rock Mining Calculator">
-        <meta name="author" content="VaporVader">
+        <meta name="author" content="Ronny Tammer">
 
         <script src="js/materials.js" type="text/javascript"></script>
         <script src="js/rock-types.js" type="text/javascript"></script>
         <script src="js/rock-calculator.js" type="text/javascript"></script>
+        <script src="js/tour.js" type="text/javascript"></script>
         <script src="js/main.js" type="text/javascript"></script>
 
         <link href="addons/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/main.css" rel="stylesheet" type="text/css" />
+        <link href="css/tour.css" rel="stylesheet" type="text/css" />
         <link href="css/mobile.css" rel="stylesheet" type="text/css" />
 
         <link href="images/icons/favicon.ico" rel="icon" type="image/ico">
@@ -115,9 +117,9 @@
                 </div>
             </div>
 
-            <div id="calculator-copyright" class="calculator-grid">
+            <div class="footer calculator-grid">
                 <div class="grid-element full">
-                    <span>Version 1.4.0</span> - <span>Made with <i style="color: #cc0000;" class="fa fa-heart" aria-hidden="true"></i> by <a href="https://robertsspaceindustries.com/citizens/eXpG_VaporVader" target="_blank">VaporVader</a> - <a href="https://explorer-germany.com/" target="_blank">Explorer Germany</a></span>
+                    <span>Version 1.5.0</span> - <span>Made with <i style="color: #cc0000;" class="fa fa-heart" aria-hidden="true"></i> by <a href="https://robertsspaceindustries.com/citizens/eXpG_VaporVader" target="_blank">VaporVader</a> - <a href="https://explorer-germany.com/" target="_blank">Explorer Germany</a></span>
                 </div>
 
                 <div class="grid-element full">
@@ -126,6 +128,18 @@
 
                 <div id="app-install-text" class="grid-element full" style="display: none;">
                     <span>Now available as App: <span class="link">Install App</span></span>
+                </div>
+
+                <div class="grid-element full">
+                    <span>How to use it? <span class="link" onclick="initTour();">Show me the tutorial</span></span>
+                </div>
+            </div>
+
+            <div class="footer calculator-grid">
+                <div class="grid-element full">
+                    <a href="/">SC Rock Mining Calculator</a><span> © 2022</span>
+                    <a href="/privacy-policy" class="right-positioned-link">Privacy Policy</a>
+                    <a href="/legal-info" class="right-positioned-link">Legal Info</a>
                 </div>
             </div>
 
