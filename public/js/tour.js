@@ -249,7 +249,7 @@ let Tour =
         }
 
         containerElement.scrollIntoView({
-            block: 'end'
+            block: 'center'
         });
     },
 
