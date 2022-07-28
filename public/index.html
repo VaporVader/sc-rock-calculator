@@ -38,6 +38,9 @@
             </div>
 
             <div id="calculator-mask">
+                <div class="block-desc-container">
+                    <div class="block-desc-text">rock type</div>
+                </div>
                 <div id="calculator-rock-type" class="calculator-grid with-additional-side-button">
                     <div class="grid-element">
                         <div class="icon-input with-unit">
@@ -55,6 +58,9 @@
 
                 <div id="calculator-rock-type-overview" style="display: none;"><!-- ROCK TYPE OVERVIEW RENDER AREA --></div>
     
+                <div class="block-desc-container">
+                    <div class="block-desc-text">rock data</div>
+                </div>
                 <div id="calculator-rock" class="calculator-grid">
                     <div class="grid-element">
                         <div class="icon-input with-unit">
@@ -88,9 +94,10 @@
                         </div>
                     </div>
                 </div>
-    
-                <div id="calculator-materials" style="display:none;"><!-- MATERIAL RENDER AREA --></div>
-    
+
+                <div id="calculator-add-material-desc" class="block-desc-container">
+                    <div class="block-desc-text">more action</div>
+                </div>
                 <div id="calculator-add-material" class="calculator-grid">
                     <div class="grid-element full">
                         <div class="button with-icon" onclick="addNewMaterial();">
@@ -100,6 +107,11 @@
                     </div>
                 </div>
     
+                <div id="calculator-materials" style="display:none;"><!-- MATERIAL RENDER AREA --></div>
+    
+                <div class="block-desc-container">
+                    <div class="block-desc-text">global actions</div>
+                </div>
                 <div id="calculator-calculate" class="calculator-grid">
                     <div class="grid-element full">
                         <div class="button finish with-icon" onclick="calculate();">
@@ -153,6 +165,9 @@
             </div>
 
             <template id="rockContentTemplate">
+                <div class="material-desc block-desc-container">
+                    <div class="block-desc-text">material data</div>
+                </div>
                 <div class="material calculator-grid">
                     <div class="grid-element">
                         <div class="icon-input">

@@ -1,4 +1,4 @@
-/** Overlay styles */
+/* Overlay styles */
 #tour-overlay
 {
     position: fixed;
@@ -13,7 +13,7 @@
     z-index: 1;
 }
 
-/** Style for hightlighted element */
+/* Style for hightlighted element */
 .tour-highlighted
 {
     position: relative;
@@ -21,7 +21,7 @@
     z-index: 2;
 }
 
-/** Style for step element */
+/* Style for step element */
 .tour-step-container
 {
     position: absolute;

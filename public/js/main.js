@@ -95,7 +95,7 @@ function addNewMaterial( material )
         return;
     }
 
-    RockCalculator.addNewMaterial( material );
+    RockCalculator.addNewMaterial( material, true, true );
 }
 
 /**
@@ -247,13 +247,13 @@ function initTour()
     Tour.addStep({
         elementSelector : '#calculator-rock .grid-element:nth-of-type(3n)',
         headline        : 'Rock value',
-        description     : 'The total value of the rock is displayed at this field. This value is based on all entered materials.'
+        description     : 'The total value of the rock is displayed at this field. This value is based on all entered materials except "Inert" material.'
     });
 
     Tour.addStep({
         elementSelector : '#calculator-rock .grid-element:nth-of-type(4n)',
         headline        : 'Total material SCU',
-        description     : 'The total SCU value of all entered materials.'
+        description     : 'The total SCU value of all entered materials except "Inert" material.'
     });
 
     Tour.addStep({

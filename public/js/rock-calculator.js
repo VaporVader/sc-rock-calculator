@@ -8,6 +8,7 @@ let RockCalculator =
     rockValueScuElement         : null,
     rockTypeElement             : null,
     addNewMaterialElement       : null,
+    addNewMaterialDescElement   : null,
     rockTypeOverviewRenderArea  : null,
     rockTypeTemplate            : null,
     rockTypeContentEntryTemplate: null,
@@ -35,6 +36,7 @@ let RockCalculator =
         this.rockValueScuElement            = document.querySelector( '#rockValueSCU' );
         this.rockTypeElement                = document.querySelector( '#rockType' );
         this.addNewMaterialElement          = document.querySelector( '#calculator-add-material' );
+        this.addNewMaterialDescElement      = document.querySelector( '#calculator-add-material-desc' );
         this.rockTypeOverviewRenderArea     = document.querySelector( '#calculator-rock-type-overview' );
         this.rockTypeTemplate               = document.querySelector( '#rockTypeTemplate' );
         this.rockTypeContentEntryTemplate   = document.querySelector( '#rockTypeContentEntryTemplate' );
@@ -48,7 +50,10 @@ let RockCalculator =
         this._setSelectableMaterials();
 
         // add first material, default = Inert
-        this.addNewMaterial();
+        this.addNewMaterial( 'Inert', true, false, 100 );
+
+        // first calculation
+        this.calculate();
     },
 
     /**
@@ -148,6 +153,23 @@ let RockCalculator =
     },
 
     /**
+     * Check percentages for all materials.
+     * @private
+     */
+    _checkAllMaterialPercentages: function()
+    {
+        let materials = this.materialsRenderArea.querySelectorAll( 'div.material' );
+
+        // get current materials percentage
+        materials.forEach( ( material ) =>
+        {
+            let materialPercentageElement = material.querySelector( 'input[name="rockContentPercentage"]' );
+
+            this._checkMaterialsPercentage( materialPercentageElement );
+        });
+    },
+
+    /**
      * Check that the sums of the material percentages not exceed 100%.
      * Also checks that an entered percentage cannot be negative.
      * @param {Object} changedPercentageElement
@@ -163,18 +185,94 @@ let RockCalculator =
             this.calculate();
         }
 
-        let materialsPercentage = 0;
-        let materialsPercentageElements = this.materialsRenderArea.querySelectorAll( 'div.material input[name="rockContentPercentage"]' );
+        let materials               = this.materialsRenderArea.querySelectorAll( 'div.material' );
+        let materialsPercentage     = 0;
+        let inertMaterialElement    = null;
 
         // get current materials percentage
-        materialsPercentageElements.forEach( ( materialsPercentageElement ) =>
+        materials.forEach( ( material ) =>
         {
-            materialsPercentage += parseFloat( materialsPercentageElement.value );
+            let materialTypeElement         = material.querySelector( 'select[name="rockContent"]' );
+            let materialPercentageElement   = material.querySelector( 'input[name="rockContentPercentage"]' );
+
+            if( materialTypeElement.value === 'Inert' )
+            {
+                inertMaterialElement = material;
+            }
+
+            let materialPercentage = parseFloat( materialPercentageElement.value );
+
+            // only when percentage is a valid number
+            if( isNaN( materialPercentage ) === false )
+            {
+                materialsPercentage += materialPercentage;
+            }
         });
+
+        // when inert material is presented, then the rest of material percentage is always inert
+        // @TODO: Add as setting, so that the user can choose.
+        if( inertMaterialElement !== null )
+        {
+            let inertMaterialPercentageElement  = inertMaterialElement.querySelector( 'input[name="rockContentPercentage"]' );
+            let inertMaterialPercentage         = parseFloat( inertMaterialPercentageElement.value );
+
+            // when valid percentage 
+            if( isNaN( inertMaterialPercentage ) )
+            {
+                inertMaterialPercentage = 0;
+            }
+
+            let materialsPercentageWithoutInert = materialsPercentage - inertMaterialPercentage;
+            let newInertMaterialPercentage      = 100 - materialsPercentageWithoutInert;
+
+            if( newInertMaterialPercentage < 0 )
+            {
+                newInertMaterialPercentage = 0;
+            }
+
+            inertMaterialPercentageElement.value = newInertMaterialPercentage; 
+
+            // recalculate the new materials percentage.
+            materialsPercentage = materialsPercentage - inertMaterialPercentage + newInertMaterialPercentage;
+
+            this.calculate();
+        }
 
         // when exceeding, then limit changed percentage element to max value that not exceeds.
         if( materialsPercentage > 100 )
         {
+            // when "Inert" material is presented, then reduce the value of this percentage and retry.
+            if( inertMaterialElement !== null)
+            {
+                let inertMaterialPercentageElement  = inertMaterialElement.querySelector( 'input[name="rockContentPercentage"]' );
+                let inertMaterialPercentage         = parseFloat( inertMaterialPercentageElement.value );
+
+                // when valid percentage 
+                if( isNaN( inertMaterialPercentage ) === false )
+                {
+                    let materialsPercentageOvershot     = materialsPercentage - 100;
+                    let newInertMaterialPercentage      = inertMaterialPercentage - materialsPercentageOvershot;
+
+                    if( newInertMaterialPercentage < 0 )
+                    {
+                        newInertMaterialPercentage = 0;
+                    }
+
+                    inertMaterialPercentageElement.value = newInertMaterialPercentage; 
+
+                    // recalculate the new materials percentage.
+                    materialsPercentage = materialsPercentage - inertMaterialPercentage + newInertMaterialPercentage;
+
+                    // when value now is okay, then we can exit here.
+                    if( materialsPercentage <= 100 )
+                    {
+                        this.calculate();
+
+                        return;
+                    }
+                }
+            }
+
             changedPercentageElement.value = changedPercentageElement.value - ( materialsPercentage - 100 );
 
             this.calculate();
@@ -241,10 +339,12 @@ let RockCalculator =
             if( this.selectableMaterials.length === 0 )
             {
                 this.addNewMaterialElement.style.display = 'none';
+                this.addNewMaterialDescElement.style.display = 'none';
             }
             else
             {
                 this.addNewMaterialElement.style.display = '';
+                this.addNewMaterialDescElement.style.display = '';
             }
         }
     },
@@ -273,12 +373,14 @@ let RockCalculator =
         if( rockTypeData === null )
         {
             this.addNewMaterialElement.style.display = '';
-            this.addNewMaterial();
+            this.addNewMaterialDescElement.style.display = '';
+            this.addNewMaterial( 'Inert', true, false, 100 );
 
             return;
         }
 
         this.addNewMaterialElement.style.display = 'none';
+        this.addNewMaterialDescElement.style.display = 'none';
         this.selectedRockTypePreset = rockType;
 
         // create preset from rock type content
@@ -287,7 +389,7 @@ let RockCalculator =
             this.addNewMaterial( materialName, false );
         }
 
-        this.addNewMaterial( 'Inert', false );
+        this.addNewMaterial( 'Inert', false, false, 100 );
     },
 
     /**
@@ -428,8 +530,13 @@ let RockCalculator =
             let materialScu   = this.convertKgToScu( materialKg );
             let materialValue = this.convertScuToUnits( materialScu ) * this.materials[ material ].price.refined;   
 
-            rockValue += materialValue;
-            rockValueScu += materialScu;
+            // skip inert for complete rock calculation
+            // @TODO: Add setting so that the user can choose what to calculate
+            if( material !== 'Inert' )
+            {
+                rockValue += materialValue;
+                rockValueScu += materialScu;
+            }
 
             materialScuElement.value = this.round( materialScu );
             materialValueElement.value = Math.round( materialValue );
@@ -445,7 +552,7 @@ let RockCalculator =
      * @param {string} material
      * @param {boolean} changeable
      */
-    addNewMaterial: function( material, changeable )
+    addNewMaterial: function( material, changeable, prepend, startValue )
     {
         // when no selectable materials left, then exit.
         if( this.selectableMaterials.length === 0 )
@@ -462,6 +569,11 @@ let RockCalculator =
             {
                 return;
             }
+
+            if( material === 'Inert' )
+            {
+                startValue = 100;
+            }
         }
 
         if( changeable === undefined )
@@ -469,11 +581,23 @@ let RockCalculator =
             changeable = true;
         }
 
+        if( prepend === undefined )
+        {
+            prepend = false;
+        }
+
+        if( startValue === undefined )
+        {
+            startValue = 0;
+        }
+
         let newMaterialElement  = this.materialTemplate.content.cloneNode( true );
         let rockContentSelect   = newMaterialElement.querySelector( 'select[name=rockContent]' );
         let rockContentOptions  = rockContentSelect.querySelectorAll( 'option' );
+        let materialPercentage  = newMaterialElement.querySelector( 'input[name=rockContentPercentage]' );
 
-        rockContentSelect.value = material;
+        rockContentSelect.value     = material;
+        materialPercentage.value    = startValue;
 
         // when select should not changeable
         // then disable it and show lock icon after material name
@@ -493,24 +617,35 @@ let RockCalculator =
             newMaterialElement.querySelector( 'div.material-delete-element' ).style.display = 'none';
         }
 
-        this.materialsRenderArea.append( newMaterialElement );
+        if( prepend )
+        {
+            this.materialsRenderArea.prepend( newMaterialElement );
+        }
+        else
+        {
+            this.materialsRenderArea.append( newMaterialElement );
+        }
+       
         this.materialsRenderArea.style.display = '';
 
         this._setSelectableMaterials();
+        this._checkAllMaterialPercentages();
     },
 
     /**
      * Delete the given material element from current calculator.
      * And recaculate all.
-     * @param {Object} materialElement 
+     * @param {Object} materialElement
      */
     deleteMaterial: function( materialElement )
     {
+        materialElement.previousElementSibling.remove();
         materialElement.remove();
 
         this.calculate();
 
         this._setSelectableMaterials();
+        this._checkAllMaterialPercentages();
     },
 
     /**
@@ -539,7 +674,8 @@ let RockCalculator =
         }
 
         // add first material, default = Inert
-        this.addNewMaterial();
+        this.addNewMaterial( 'Inert', true, false, 100 );
+        this.calculate();
     },
 
     /**
