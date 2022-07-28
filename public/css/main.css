@@ -29,8 +29,14 @@ span.link
     cursor: pointer;
 }
 
+p
+{
+    margin-bottom: 10px;
+}
+
 /** Wrapper */
-#calculator
+#calculator,
+#legal-info
 {
     position: relative;
 
@@ -39,7 +45,29 @@ span.link
     max-width: 540px;
 }
 
+.fixed-width
+{
+    width: 540px;
+}
+
+.sub-page .content-container
+{
+    background-color: rgba(141, 180, 224, 0.2);
+
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.sub-page .text-wall
+{
+    padding: 20px;
+
+    font-size: 14px;
+    line-height: 1.4em;
+}
+
 /** Headline */
+h1,
 .headline
 {
     padding-bottom: 5px;
@@ -48,6 +76,33 @@ span.link
     border-bottom:1px solid #efefef;
 
     text-align: center;
+}
+
+.sub-page .content-container h1
+{
+    text-align: left;
+
+    font-size:32px;
+    line-height: normal;
+}
+
+h2
+{
+    font-size: 18px;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+/** List styles */
+ul
+{
+    margin-bottom: 10px;
+}
+
+ul li
+{
+    margin-left: 20px;
 }
 
 /** Grid Style */
@@ -288,10 +343,17 @@ input[readonly]::placeholder
     border: 1px solid rgb(195, 0, 0);
 }
 
-/* Copyright */
-#calculator-copyright
+/* Footer */
+.footer
 {
     font-size: 0.75em;
+}
+
+.footer .right-positioned-link
+{
+    float: right;
+
+    margin-left: 10px;
 }
 
 /* Footer Logos */
