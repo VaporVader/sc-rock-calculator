@@ -1,4 +1,4 @@
-/** Basic */
+/* Basic */
 *
 {
     margin:0;
@@ -34,7 +34,7 @@ p
     margin-bottom: 10px;
 }
 
-/** Wrapper */
+/* Wrapper */
 #calculator,
 #legal-info
 {
@@ -66,7 +66,34 @@ p
     line-height: 1.4em;
 }
 
-/** Headline */
+/* Block description */
+.block-desc-container
+{
+    position: relative;
+
+    background: linear-gradient( 220deg, transparent 10px, rgba( 141, 180, 224, 0.2 ) 10px );
+
+    height: 10px;
+    width: 150px;
+
+    font-size: 12px;
+    font-style: italic;
+    color: rgba( 255, 255, 255, 0.4 );
+
+    padding-left: 10px;
+    padding-top: 5px;
+
+    overflow: visible;
+}
+
+.block-desc-container .block-desc-text
+{
+    position: relative;
+
+    top: -2px;
+}
+
+/* Headline */
 h1,
 .headline
 {
@@ -94,7 +121,7 @@ h2
     margin-bottom: 10px;
 }
 
-/** List styles */
+/* List styles */
 ul
 {
     margin-bottom: 10px;
@@ -105,7 +132,7 @@ ul li
     margin-left: 20px;
 }
 
-/** Grid Style */
+/* Grid Style */
 .calculator-grid,
 #calculator-materials > .material
 {
@@ -130,7 +157,7 @@ ul li
     grid-column: 1 / 3;
 }
 
-/** Inputs */
+/* Inputs */
 input,
 select
 {
@@ -217,7 +244,7 @@ input[readonly]::placeholder
     opacity: 1;
 }
 
-/** Buttons */
+/* Buttons */
 .button
 {
     position: relative;
