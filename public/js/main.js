@@ -167,6 +167,9 @@ function initTour()
     // set tour as visited at local storage, so that the user only see this once automatically.
     window.localStorage.setItem( 'tourVisited', 1 );
 
+    // reset calculator
+    resetCalculator();
+
     Tour.init( '#calculator' );
 
     Tour.addStep({
