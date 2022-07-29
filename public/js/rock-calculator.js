@@ -213,70 +213,52 @@ let RockCalculator =
         // @TODO: Add as setting, so that the user can choose.
         if( inertMaterialElement !== null )
         {
-            let inertMaterialPercentageElement  = inertMaterialElement.querySelector( 'input[name="rockContentPercentage"]' );
-            let inertMaterialPercentage         = parseFloat( inertMaterialPercentageElement.value );
-
-            // when valid percentage 
-            if( isNaN( inertMaterialPercentage ) )
-            {
-                inertMaterialPercentage = 0;
-            }
-
-            let materialsPercentageWithoutInert = materialsPercentage - inertMaterialPercentage;
-            let newInertMaterialPercentage      = 100 - materialsPercentageWithoutInert;
-
-            if( newInertMaterialPercentage < 0 )
-            {
-                newInertMaterialPercentage = 0;
-            }
-
-            inertMaterialPercentageElement.value = newInertMaterialPercentage; 
-
-            // recalculate the new materials percentage.
-            materialsPercentage = materialsPercentage - inertMaterialPercentage + newInertMaterialPercentage;
-
-            this.calculate();
+            materialsPercentage = this._blanceWithInertMaterial( inertMaterialElement, materialsPercentage );
         }
 
         // when exceeding, then limit changed percentage element to max value that not exceeds.
         if( materialsPercentage > 100 )
         {
-            // when "Inert" material is presented, then reduce the value of this percentage and retry.
-            if( inertMaterialElement !== null)
-            {
-                let inertMaterialPercentageElement  = inertMaterialElement.querySelector( 'input[name="rockContentPercentage"]' );
-                let inertMaterialPercentage         = parseFloat( inertMaterialPercentageElement.value );
-
-                // when valid percentage 
-                if( isNaN( inertMaterialPercentage ) === false )
-                {
-                    let materialsPercentageOvershot     = materialsPercentage - 100;
-                    let newInertMaterialPercentage      = inertMaterialPercentage - materialsPercentageOvershot;
-
-                    if( newInertMaterialPercentage < 0 )
-                    {
-                        newInertMaterialPercentage = 0;
-                    }
-
-                    inertMaterialPercentageElement.value = newInertMaterialPercentage; 
-
-                    // recalculate the new materials percentage.
-                    materialsPercentage = materialsPercentage - inertMaterialPercentage + newInertMaterialPercentage;
-
-                    // when value now is okay, then we can exit here.
-                    if( materialsPercentage <= 100 )
-                    {
-                        this.calculate();
-
-                        return;
-                    }
-                }
-            }
-
             changedPercentageElement.value = changedPercentageElement.value - ( materialsPercentage - 100 );
 
             this.calculate();
         }
+    },
+
+    /**
+     * Set material percentage of inert material so that the sum of all materials are always 100%.
+     * @param {Object} inertMaterialElement 
+     * @param {Float} materialsPercentage 
+     * @returns {Float}
+     * @private
+     */
+    _blanceWithInertMaterial: function( inertMaterialElement, materialsPercentage )
+    {
+        let inertMaterialPercentageElement  = inertMaterialElement.querySelector( 'input[name="rockContentPercentage"]' );
+        let inertMaterialPercentage         = parseFloat( inertMaterialPercentageElement.value );
+
+        // when valid percentage 
+        if( isNaN( inertMaterialPercentage ) )
+        {
+            inertMaterialPercentage = 0;
+        }
+
+        let materialsPercentageWithoutInert = materialsPercentage - inertMaterialPercentage;
+        let newInertMaterialPercentage      = 100 - materialsPercentageWithoutInert;
+
+        if( newInertMaterialPercentage < 0 )
+        {
+            newInertMaterialPercentage = 0;
+        }
+
+        inertMaterialPercentageElement.value = newInertMaterialPercentage; 
+
+        // recalculate the new materials percentage.
+        materialsPercentage = materialsPercentage - inertMaterialPercentage + newInertMaterialPercentage;
+
+        this.calculate();
+
+        return materialsPercentage;
     },
 
     /**
