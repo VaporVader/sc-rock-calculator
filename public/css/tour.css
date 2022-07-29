@@ -34,8 +34,6 @@
     z-index: 3;
 
     width: 100%;
-
-    scroll-margin: 10px;
 }
 
 .tour-step-arrow
@@ -117,7 +115,7 @@
 
     border-top: 1px solid rgb(12 90 147);
 
-    height: 48px;
+    height: 50px;
 }
 
 .tour-step-button
