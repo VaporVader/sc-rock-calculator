@@ -646,6 +646,7 @@ let RockCalculator =
         this.rockTypeElement.value = '';
 
         this.addNewMaterialElement.style.display = '';
+        this.addNewMaterialDescElement.style.display = '';
 
         this._setSelectableMaterials();
 
