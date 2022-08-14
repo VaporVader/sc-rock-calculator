@@ -21,7 +21,7 @@ let RockCalculator =
 
     rockTypeInfoVisible: false,
 
-    rockTypeImagePath: 'images/rock-types/',
+    rockTypeImagePath: '/images/rock-types/',
 
     /**
      * Init function to set start values for Calculator.

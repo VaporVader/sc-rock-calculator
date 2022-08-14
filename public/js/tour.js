@@ -6,7 +6,7 @@ let Tour =
     bodyElement: null,
 
     // when no element to attach the step, then insert step here.
-    defaultInsertElement: null,
+    container: null,
 
     // Array with tour step entries.
     steps: [],
@@ -20,12 +20,12 @@ let Tour =
 
     /**
      * Init function to set start values for the Tour instance.
-     * @param {String} defaultInsertSelector
+     * @param {String} containerSelector
      */
-    init: function( defaultInsertSelector )
+    init: function( containerSelector )
     {
-        this.bodyElement            = document.querySelector( 'body' );
-        this.defaultInsertElement   = document.querySelector( defaultInsertSelector );
+        this.bodyElement    = document.querySelector( 'body' );
+        this.container      = document.querySelector( containerSelector );
 
         // reset step values
         this.steps          = [];
@@ -157,10 +157,12 @@ let Tour =
      _createStepContainer: function( step )
     {
         let elementToHighlight          = document.querySelector( step.elementSelector );
+        let parentContainerPosition     = null;
         let parentPosition              = null;
         let elementToHighlightPosition  = null;
         let containerTopPosition        = null;
         let arrowLeftPosition           = null;
+        let topOffset                   = null;
 
         // when we find the element to highlight
         if( elementToHighlight !== undefined && elementToHighlight !== null )
@@ -183,6 +185,12 @@ let Tour =
 
             elementToHighlight.classList.add( 'tour-highlighted' );
 
+            // get position for container
+            parentContainerPosition = this.container.getBoundingClientRect();
+
+            // get top offset from body
+            topOffset = parseFloat( window.getComputedStyle( this.bodyElement, null ).getPropertyValue( 'padding-top' ));
+
             // get parent position
             parentPosition = elementToHighlight.parentNode.getBoundingClientRect();
 
@@ -190,7 +198,12 @@ let Tour =
             elementToHighlightPosition = elementToHighlight.getBoundingClientRect();
 
             // calculate position for container
-            containerTopPosition = parseInt( elementToHighlightPosition[ 'y' ] ) + parseInt( window.scrollY ) + parseInt( elementToHighlightPosition[ 'height' ] );
+            containerTopPosition = 
+                parseInt( elementToHighlightPosition[ 'y' ] ) 
+                + parseInt( window.scrollY ) 
+                + parseInt( elementToHighlightPosition[ 'height' ] ) 
+                - parseInt( parentContainerPosition[ 'y' ] )
+                + topOffset;
             
             // calculate position for arrow of container
             arrowLeftPosition = parseInt( elementToHighlightPosition[ 'x' ] ) - parseInt( parentPosition[ 'x' ] );
@@ -245,7 +258,7 @@ let Tour =
         }
         else
         {
-            this.defaultInsertElement.append( containerElement );
+            this.container.append( containerElement );
         }
 
         containerElement.scrollIntoView({

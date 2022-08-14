@@ -1,15 +1,43 @@
 let appInstallContainer = null;
+let Loader = null;
 
 // when document is ready
 document.addEventListener( 'DOMContentLoaded', function()
 {
-    RockCalculator.init( materials, rockTypes );
+    /**
+     * Loader handling.
+     */
+    Loader = {
+        element: document.querySelector( '#loader' ),
+
+        show: function()
+        {
+            this.element.style.display = '';
+
+            document.querySelectorAll( '.hide-when-loading' ).forEach( ( elementEntry ) =>
+            {
+                elementEntry.style.display = 'none';
+            });
+        },
+
+        hide: function()
+        {
+            this.element.style.display = 'none';
+
+            document.querySelectorAll( '.hide-when-loading' ).forEach( ( elementEntry ) =>
+            {
+                elementEntry.style.display = '';
+            });
+        }
+    };
 });
 
 // when window is loaded
 window.addEventListener( 'load', function()
 {
-    this.document.querySelector( '#calculator' ).style.display = '';
+    Navigation.init( '#content-container' );
+
+    loadPage();
 
     // register service worker for PWA handling.
     if( 'serviceWorker' in navigator ) 
@@ -32,19 +60,47 @@ window.addEventListener( 'load', function()
         // We've used the prompt, and can't use it again, throw it away.
         installPrompt = null;
     });
+});
 
-    // start tour after 3 second.
-    // but only when user has not seen it once.
-    let hasTourVisited = false;
-
-    if( parseInt( window.localStorage.getItem( 'tourVisited' ) ) !== 1 )
+// listen to click events.
+document.addEventListener( 'click', ( event ) =>
+{
+    // when a link is clicked with the dynamic class, then load over Navigation.
+    if( 
+        event.target.matches( 'a' ) 
+        && event.target.classList.contains( 'dynamic-loading' ) 
+    )
     {
-        window.setTimeout( function()
+        event.preventDefault();
+
+        let linkTarget = event.target.getAttribute( 'href' );
+
+        // remove first and last "/"
+        if( linkTarget.slice( 0, 1 ) === '/' )
         {
-            initTour();
-        }, 3000 );
+            linkTarget = linkTarget.substring( 1 );
+        }
+
+        if( linkTarget.slice( -1 ) === '/' )
+        {
+            linkTarget = linkTarget.substring( 0, linkTarget.length - 1 );
+        }
+
+        loadPage( linkTarget );
     }
 });
+
+// when retrive a history state.
+window.onpopstate = function( event )
+{
+    if( event.state !== undefined && event.state !== null )
+    {
+        if( event.state.page !== undefined && event.state.page !== null )
+        {
+            loadPage( event.state.page, true );
+        }
+    }
+};
 
 let installPrompt;
 
@@ -58,6 +114,46 @@ window.addEventListener( 'beforeinstallprompt', ( event ) => {
   // Update UI notify the user they can install the app
   showAppInstall();
 });
+
+/**
+ * Loads a page over the Navigation object.
+ * @param {String} page 
+ */
+function loadPage( page, isPopped )
+{
+    Loader.show();
+
+    if( page === undefined )
+    {
+        page = null;
+    }
+
+    Navigation.loadPage( page, isPopped ).then( ( loadedPage ) =>
+    {
+        // when rock calculator was loaded, then init the rock calculator.
+        if( loadedPage.identifier === 'rock-calculator' )
+        {
+            RockCalculator.init( materials, rockTypes );
+
+            // start tour after 3 second.
+            // but only when user has not seen it once.
+            if( parseInt( window.localStorage.getItem( 'tourVisited' ) ) !== 1 )
+            {
+                window.setTimeout( function()
+                {
+                    initTour();
+                }, 3000 );
+            }
+        }
+
+        // hide loader
+        // Use timeout to reduce flickering, so that loader has a chance to be shown.
+        window.setTimeout( function()
+        {
+            Loader.hide();
+        }, 1000 );
+    });
+}
 
 /**
  * Show app install container.
