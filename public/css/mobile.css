@@ -5,3 +5,21 @@
         width: auto;
     }
 }
+
+@media only screen and (max-width: 900px)
+{
+    #top-sidebar-button.sidebar-open
+    {
+        visibility: hidden;
+    }
+
+    #navigation-overlay.mobile-visible
+    {
+        display: block;
+    }
+
+    body.mobile-no-scroll
+    {
+        overflow: hidden;
+    }
+}

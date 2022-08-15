@@ -1,4 +1,20 @@
 /**
+ * Show / hide the navigation sidebar.
+ */
+function toggleSidebar()
+{
+    let sidebarElement      = document.querySelector( '#side-navigation' );
+    let sidebarToggleButton = document.querySelector( '#top-sidebar-button' );
+    let navigationOverlay   = document.querySelector( '#navigation-overlay' );
+    let body                = document.querySelector( 'body' );
+
+    sidebarElement.classList.toggle( 'open' );
+    sidebarToggleButton.classList.toggle( 'sidebar-open' );
+    navigationOverlay.classList.toggle( 'mobile-visible' );
+    body.classList.toggle( 'mobile-no-scroll' );
+}
+
+/**
  * Loads a page over the Navigation object.
  * @param {String} page 
  */

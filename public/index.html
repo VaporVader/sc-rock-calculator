@@ -19,6 +19,7 @@
 
         <link href="/addons/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css" />
+        <link href="/css/navigation.css" rel="stylesheet" type="text/css" />
         <link href="/css/tour.css" rel="stylesheet" type="text/css" />
         <link href="/css/mobile.css" rel="stylesheet" type="text/css" />
 
@@ -42,7 +43,7 @@
         </div>
 
         <div id="top-navigation">
-            <div id="top-sidebar-button">
+            <div id="top-sidebar-button" onclick="toggleSidebar();">
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </div>
 
@@ -50,6 +51,10 @@
                 <img src="/images/icons/icon-512x512.png" width="30px" height="30px" alt="" />
                 <span>Rock Mining Calculator</span>
             </div>
+        </div>
+
+        <div id="side-navigation">
+
         </div>
 
         <div id="content-container-grid" class="hide-when-loading" style="display:none;">
@@ -86,6 +91,8 @@
                 </div>
             </div>
         </div>
+
+        <div id="navigation-overlay" onclick="toggleSidebar();"></div>
 
         <script type="module">
             // Import the functions you need from the SDKs you need
