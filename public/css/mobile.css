@@ -6,14 +6,15 @@
     }
 }
 
-@media only screen and (max-width: 900px)
+/* Mobile layout for Navigation */
+@media only screen and (max-width: 1090px)
 {
     #top-sidebar-button.sidebar-open
     {
         visibility: hidden;
-    }
 
-    /* Navigation overlay */
+        left: 0;
+    }
     #navigation-overlay
     {
         position: fixed;

@@ -48,7 +48,8 @@ window.addEventListener( 'load', function()
     // init app install handling over button.
     appInstallContainer = document.querySelector( '#app-install-text' );
 
-    appInstallContainer.querySelector( '.link' ).addEventListener( 'click', async () => {
+    appInstallContainer.querySelector( '.link' ).addEventListener( 'click', async () => 
+    {
         hideAppInstall();
 
         // show install prompt.
@@ -65,15 +66,20 @@ window.addEventListener( 'load', function()
 // listen to click events.
 document.addEventListener( 'click', ( event ) =>
 {
+    let eventTarget             = event.target;
+    let eventTargetClosestLink  = event.target.closest( 'a' );
+
+    if( eventTarget.matches( 'a' ) === false && eventTargetClosestLink !== undefined && eventTargetClosestLink !== null )
+    {
+        eventTarget = eventTargetClosestLink;
+    }
+
     // when a link is clicked with the dynamic class, then load over Navigation.
-    if( 
-        event.target.matches( 'a' ) 
-        && event.target.classList.contains( 'dynamic-loading' ) 
-    )
+    if( eventTarget.matches( 'a' ) && eventTarget.classList.contains( 'dynamic-loading' ) )
     {
         event.preventDefault();
 
-        let linkTarget = event.target.getAttribute( 'href' );
+        let linkTarget = eventTarget.getAttribute( 'href' );
 
         // remove first and last "/"
         if( linkTarget.slice( 0, 1 ) === '/' )
