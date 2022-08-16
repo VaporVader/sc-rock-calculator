@@ -48,6 +48,18 @@ function toggleSidebar()
  */
  function loadPage( page, isPopped )
  {
+    // close sidebar, when navigation overlay is visible (fixed).
+    let navigationOverlayElement = document.querySelector( '#navigation-overlay' );
+    
+    if( 
+        navigationOverlayElement !== undefined 
+        && navigationOverlayElement !== null 
+        && window.getComputedStyle( navigationOverlayElement ).position === 'fixed' 
+    )
+    {
+        toggleSidebar();
+    }
+
     Loader.show();
 
     if( page === undefined )
