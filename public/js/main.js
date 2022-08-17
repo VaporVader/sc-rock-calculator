@@ -79,7 +79,7 @@ document.addEventListener( 'click', ( event ) =>
     {
         event.preventDefault();
 
-        let linkTarget = eventTarget.getAttribute( 'href' );
+        let linkTarget = eventTarget.getAttribute( 'href' ); 
 
         // remove first and last "/"
         if( linkTarget.slice( 0, 1 ) === '/' )

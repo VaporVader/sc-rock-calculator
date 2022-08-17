@@ -90,6 +90,8 @@ let Navigation = {
 
         this.page = page;
 
+        this._setActiveNavigationEntry();
+
         // now load content and return a promise for outside usage.
         // Promise returns the page string the was loaded.
         return new Promise( ( resolve, reject ) =>
@@ -114,7 +116,28 @@ let Navigation = {
     },
 
     /**
+     * Set navigation entry as active, corresponding to current path.
+     * @private
+     */
+    _setActiveNavigationEntry: function()
+    {
+        let path                        = document.location.pathname;
+        let sideNavigationLinkEntries   = document.querySelectorAll( '#side-navigation .navigation-entry a' );
+        
+        sideNavigationLinkEntries.forEach( ( link ) =>
+        {
+            link.classList.remove( 'active' );
+
+            if( link.getAttribute( 'href' ) === path )
+            {
+                link.classList.add( 'active' );
+            }
+        });
+    },
+
+    /**
      * Read current path from url.
+     * @private
      */
     _currentPath: function()
     {
