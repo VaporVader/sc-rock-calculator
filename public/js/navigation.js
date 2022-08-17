@@ -90,7 +90,14 @@ let Navigation = {
 
         this.page = page;
 
+        // set navigation entry as active
         this._setActiveNavigationEntry();
+
+        // end current Tour
+        if( Tour !== undefined && Tour !== null )
+        {
+            Tour.end();
+        }
 
         // now load content and return a promise for outside usage.
         // Promise returns the page string the was loaded.
