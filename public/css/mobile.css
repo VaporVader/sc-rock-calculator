@@ -9,12 +9,13 @@
 /* Mobile layout for Navigation */
 @media only screen and (max-width: 1090px)
 {
-    #top-sidebar-button.sidebar-open
+    #top-left-buttons.sidebar-open
     {
         visibility: hidden;
 
         left: 0;
     }
+    
     #navigation-overlay
     {
         position: fixed;

@@ -4,12 +4,12 @@
 function toggleSidebar()
 {
     let sidebarElement              = document.querySelector( '#side-navigation' );
-    let sidebarToggleButton         = document.querySelector( '#top-sidebar-button' );
+    let topLeftButtons              = document.querySelector( '#top-left-buttons' );
     let body                        = document.querySelector( 'body' );
     let navigationOverlayElement    = null;
 
     sidebarElement.classList.toggle( 'open' );
-    sidebarToggleButton.classList.toggle( 'sidebar-open' );
+    topLeftButtons.classList.toggle( 'sidebar-open' );
     body.classList.toggle( 'mobile-no-scroll' );
 
     // create navigation overlay when sidebar open
@@ -69,6 +69,8 @@ function toggleSidebar()
  
     Navigation.loadPage( page, isPopped ).then( ( loadedPage ) =>
     {
+        let helpButtonElement = document.querySelector( '#top-help-button' );
+
          // when rock calculator was loaded, then init the rock calculator.
         if( loadedPage.identifier === 'rock-calculator' )
         {
@@ -83,6 +85,16 @@ function toggleSidebar()
                     initTour();
                 }, 3000 );
             }
+
+            // show and set help link to Tour
+            helpButtonElement.setAttribute( 'onclick', 'initTour();' );
+            helpButtonElement.style.display = '';
+        }
+        // all other requested pages
+        else
+        {
+            // hide help link
+            helpButtonElement.style.display = 'none';
         }
  
         // hide loader
@@ -199,6 +211,9 @@ function toggleSidebar()
   */
  function initTour()
  {
+    // cancel previous tour
+    Tour.end();
+
     // set tour as visited at local storage, so that the user only see this once automatically.
     window.localStorage.setItem( 'tourVisited', 1 );
 

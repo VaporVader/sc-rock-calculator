@@ -23,38 +23,11 @@
     z-index: 4;
 }
 
-#top-sidebar-button
+#top-navigation .top-buttons
 {
-    position: relative;
-
-    left: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 50px;
-
-    cursor: pointer;
-
-    opacity: 0.9;
-
     transition-duration: 0.4s;
     transition-timing-function: cubic-bezier( 0.25, 0.75, 0.25, 1);
-    transition-property: left;
-}
-
-#top-sidebar-button:hover
-{
-    opacity: 1;
-
-    background-color: rgba( 255, 255, 255, 0.1 )
-}
-
-#top-sidebar-button.sidebar-open
-{
-    left: 260px;
+    transition-property: left, right;
 }
 
 #top-logo
@@ -69,6 +42,61 @@
     margin-left: 10px;
 
     font-weight: bold;
+}
+
+#top-left-buttons
+{
+    position: relative;
+
+    left: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: left;
+}
+
+#top-left-buttons.sidebar-open
+{
+    left: 260px;
+}
+
+#top-right-buttons
+{
+    position: relative;
+
+    right: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: right;
+}
+
+.top-button
+{
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 100%;;
+
+    cursor: pointer;
+
+    opacity: 0.9;
+
+    transition-duration: 0.2s;
+}
+
+.top-button:hover
+{
+    opacity: 1;
+
+    background-color: rgba( 255, 255, 255, 0.1 )
 }
 
 /* Side Navigation */
