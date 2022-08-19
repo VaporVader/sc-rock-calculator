@@ -225,7 +225,7 @@ function toggleSidebar()
     Tour.addStep({
         elementSelector : null,
         headline        : 'Welcome Citizen',
-        description     : "Welcome to the Star Citizen Rock Mining Calcualator.<br />This calculator should help you to find worthy rocks to mine.<br /><br />If you want, I'll show you how it works. Just click on \"Next\" and the tutorial starts right away. If not, just close this window.<br /><br />You can always start this tutorial again later via the link at the bottom of the calculator."
+        description     : "Welcome to the Star Citizen Rock Mining Calcualator.<br />This calculator should help you to find worthy rocks to mine.<br /><br />If you want, I'll show you how it works. Just click on \"Next\" and the tutorial starts right away. If not, just close this window.<br /><br />You can always start this tutorial again later via the help button at the top right corner."
     });
 
     Tour.addStep({
