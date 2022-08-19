@@ -38,6 +38,10 @@ let Navigation = {
         'privacy-policy': {
             identifier  : 'privacy-policy',
             target      : 'privacy-policy/index.html'
+        },
+        'changelog': {
+            identifier  : 'changelog',
+            target      : 'changelog/index.html'
         }
     },
 
