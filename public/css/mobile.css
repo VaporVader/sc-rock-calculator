@@ -1,6 +1,6 @@
 @media only screen and (max-width: 540px)
 {
-    .fixed-width
+    #content-container
     {
         width: auto;
     }
