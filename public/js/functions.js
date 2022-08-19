@@ -111,7 +111,7 @@ function toggleSidebar()
   */
  function showAppInstall()
  {
-    appInstallContainer.style.display = '';
+    appInstallButton.style.display = '';
  }
  
  /**
@@ -119,7 +119,7 @@ function toggleSidebar()
   */
   function hideAppInstall()
   {
-    appInstallContainer.style.display = 'none';
+    appInstallButton.style.display = 'none';
   }
  
  /**

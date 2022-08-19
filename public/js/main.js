@@ -1,4 +1,4 @@
-let appInstallContainer = null;
+let appInstallButton = null;
 let Loader = null;
 
 // when document is ready
@@ -46,9 +46,9 @@ window.addEventListener( 'load', function()
     }
 
     // init app install handling over button.
-    appInstallContainer = document.querySelector( '#app-install-text' );
+    appInstallButton = document.querySelector( '#top-install-button' );
 
-    appInstallContainer.querySelector( '.link' ).addEventListener( 'click', async () => 
+    appInstallButton.addEventListener( 'click', async () => 
     {
         hideAppInstall();
 

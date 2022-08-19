@@ -35,6 +35,7 @@
     </head>
 
     <body>
+        <!-- Global Loader -->
         <div id="loader">
             <img class="loader-logo" src="/images/icons/icon-512x512.png" width="60px" height="60px" alt="" />
             <div class="loader-bar">
@@ -42,6 +43,7 @@
             </div>
         </div>
 
+        <!-- Top Navigation-->
         <div id="top-navigation">
             <div id="top-left-buttons" class="top-buttons">
                 <div id="top-sidebar-button" class="top-button" onclick="toggleSidebar();">
@@ -51,16 +53,21 @@
 
             <div id="top-logo">
                 <img src="/images/icons/icon-512x512.png" width="30px" height="30px" alt="" />
-                <span>Rock Mining Calculator</span>
+                <span class="title-text">Rock Mining Calculator</span>
             </div>
 
             <div id="top-right-buttons" class="top-buttons">
+                <div id="top-install-button" class="top-button" style="display: none;">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                </div>
+
                 <div id="top-help-button" class="top-button" onclick="" style="display: none;">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
 
+        <!-- Side Navigation -->
         <div id="side-navigation">
             <div class="side-navigation-logo">
                 <img class="loader-logo" src="/images/icons/icon-512x512.png" width="30px" height="30px" alt="" />
@@ -113,6 +120,7 @@
             </div>
         </div>
 
+        <!-- Main Content area-->
         <div id="content-container-grid" class="hide-when-loading" style="display:none;">
             <div id="content-container"><!-- Dynamic Content Render Container --></div>
 
@@ -123,10 +131,6 @@
         
                 <div class="grid-element full">
                     <span>This is an unofficial <a href="https://robertsspaceindustries.com/" target="_blank">Star Citizen</a> application, not affiliated with the Cloud Imperium group of companies.</span>
-                </div>
-        
-                <div id="app-install-text" class="grid-element full" style="display: none;">
-                    <span>Now available as App: <span class="link">Install App</span></span>
                 </div>
             </div>
 
