@@ -1,4 +1,49 @@
 /**
+ * Check if user has already force reloaded the new version.
+ */
+function checkNewVersion()
+{
+    fetch( '/data/app.json', {
+        cache: "no-store"
+    })
+    .then( ( response ) =>
+    {
+        return response.json();
+    })
+    .then( ( appData ) =>
+    {
+        if( window.localStorage.getItem( 'appVersion' ) === appData.version )
+        {
+            return;
+        }
+
+        // show new version available popup after 1 second.
+        window.setTimeout( function()
+        {
+            let versionPopup = new Popup( 'popup-new-version-available' );
+
+            versionPopup.closeable      = false;
+            versionPopup.title          = 'New version available';
+            versionPopup.text           = 'We got an update for you.<br />To make sure everything works smoothly, we need to reload everything once.<br /><br />Just press "Update" and it will start right away.<br /><br />When you want to check what\'s changed, then take a look at the "Changelog".';
+            versionPopup.buttons        = [
+                {
+                    buttonText: 'Update',
+                    alignment: 'right',
+                    callback: function() 
+                    {
+                        window.localStorage.setItem( 'appVersion', appData.version )
+                        versionPopup.close();
+                        window.location.reload();
+                    }
+                }
+            ];
+
+            versionPopup.show();
+        }, 1000 );
+    });
+}
+
+/**
  * Show / hide the navigation sidebar.
  */
 function toggleSidebar()
@@ -211,6 +256,11 @@ function toggleSidebar()
   */
  function initTour()
  {
+    if( popupOpen )
+    {
+        return;
+    }
+
     // cancel previous tour
     Tour.end();
 

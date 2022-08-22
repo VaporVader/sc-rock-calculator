@@ -1,3 +1,4 @@
+let popupOpen = false;
 let appInstallButton = null;
 let Loader = null;
 
@@ -61,6 +62,20 @@ window.addEventListener( 'load', function()
         // We've used the prompt, and can't use it again, throw it away.
         installPrompt = null;
     });
+
+    // start first check version after 1 second
+    window.setTimeout( function()
+    {
+        checkNewVersion();
+    }, 1000);
+
+    // and now check version every 15 minutes
+    let checkVersionTimerInMs = 15 * 60 * 1000;
+
+    window.setInterval( function()
+    {
+        checkNewVersion();
+    }, checkVersionTimerInMs );
 });
 
 // listen to click events.
