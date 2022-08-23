@@ -200,7 +200,6 @@ let Tour =
             // calculate position for container
             containerTopPosition = 
                 parseInt( elementToHighlightPosition[ 'y' ] ) 
-                + parseInt( window.scrollY ) 
                 + parseInt( elementToHighlightPosition[ 'height' ] ) 
                 - parseInt( parentContainerPosition[ 'y' ] )
                 + topOffset;
