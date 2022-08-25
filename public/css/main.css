@@ -1,4 +1,35 @@
 /* Basic */
+
+/* roboto-condensed-regular - latin */
+@font-face 
+{
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/roboto-condensed-v25-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+        url('../fonts/roboto-condensed-v25-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../fonts/roboto-condensed-v25-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../fonts/roboto-condensed-v25-latin-regular.woff') format('woff'), /* Modern Browsers */
+        url('../fonts/roboto-condensed-v25-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../fonts/roboto-condensed-v25-latin-regular.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+}
+
+/* roboto-condensed-700 - latin */
+@font-face 
+{
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/roboto-condensed-v25-latin-700.eot'); /* IE9 Compat Modes */
+    src: local(''),
+        url('../fonts/roboto-condensed-v25-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../fonts/roboto-condensed-v25-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../fonts/roboto-condensed-v25-latin-700.woff') format('woff'), /* Modern Browsers */
+        url('../fonts/roboto-condensed-v25-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../fonts/roboto-condensed-v25-latin-700.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+}
+
 *
 {
     margin:0;
@@ -10,7 +41,7 @@
 body
 {
     background: url( '../images/bg-stars-2560.jpg' ) center top repeat-y #000000;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
     color:#efefef;
 
     padding:10px;
@@ -34,9 +65,86 @@ p
     margin-bottom: 10px;
 }
 
+i.red-icon
+{
+    color: #cc0000;
+}
+
+/* Loader */
+#loader
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#loader .loader-logo
+{
+    display: block;
+}
+
+#loader .loader-bar
+{
+    display: block;
+
+    width: 100px;
+    height: 6px;
+
+    margin-top:10px;
+
+    background-color: #122e49;
+
+    overflow: hidden;
+}
+
+#loader .loader-bar .loader-bar-fill
+{
+    display: block;
+
+    position: relative;
+    left: -100px;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(12,90,147,1);
+
+    animation: loaderAnimation 1.5s ease-in infinite;
+}
+
+@keyframes loaderAnimation 
+{
+    0% {
+        left: -100px;
+    }
+
+    100% {
+        left: 100px;
+    }
+}
+
 /* Wrapper */
+#content-container-grid
+{
+    position: relative;
+
+    top: 50px;
+
+    display: block;
+
+    max-width: 540px;
+}
+
 #calculator,
-#legal-info
+#legal-info,
+#content-container-grid
 {
     position: relative;
 
@@ -45,7 +153,7 @@ p
     max-width: 540px;
 }
 
-.fixed-width
+#content-container
 {
     width: 540px;
 }
@@ -62,7 +170,7 @@ p
 {
     padding: 20px;
 
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.4em;
 }
 
@@ -121,10 +229,15 @@ h2
     margin-bottom: 10px;
 }
 
+h2.nospace
+{
+    margin: 0;
+}
+
 /* List styles */
 ul
 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 ul li
@@ -132,7 +245,50 @@ ul li
     margin-left: 20px;
 }
 
+/* Text Style */
+.text-block
+{
+    display:block;
+
+    margin-bottom: 10px;
+}
+
+.subtitle-description
+{
+    font-size: 12px;
+    color: rgba( 255, 255, 255, 0.5 );
+}
+
+.subtitle-tag
+{
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 3px;
+
+    color: rgba( 255, 255, 255, 0.9 );
+    background-color: rgba(32, 87, 122, 0.9);
+
+    line-height: 1.5em;
+}
+
+/* Changelog Style */
+.changelog-entry
+{
+    border-bottom: 1px solid #efefef;
+
+    margin-bottom: 20px;
+}
+
+.changelog-entry:last-child
+{
+    border: 0;
+}
+
+
 /* Grid Style */
+.grid,
 .calculator-grid,
 #calculator-materials > .material
 {
@@ -152,6 +308,7 @@ ul li
     grid-template-columns: auto 40px;
 }
 
+.grid .grid-element.full,
 .calculator-grid .grid-element.full
 {
     grid-column: 1 / 3;
@@ -195,6 +352,9 @@ select
     position: absolute;
     left: 1px;
     top:1px;
+
+    display: flex;
+    justify-content: center;
 
     width: 38px;
     height: 38px;
@@ -296,6 +456,10 @@ input[readonly]::placeholder
 
 .button div
 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 100%;
     height: 40px;
 
@@ -391,6 +555,7 @@ input[readonly]::placeholder
     width: 100%;
 
     margin-top: 10px;
+    margin-bottom: 10px;
 
     text-align: center;
 }

@@ -1,7 +1,46 @@
 @media only screen and (max-width: 540px)
 {
-    .fixed-width
+    #content-container
     {
         width: auto;
+    }
+}
+
+/* Mobile layout for Navigation */
+@media only screen and (max-width: 1090px)
+{
+    #top-left-buttons.sidebar-open
+    {
+        visibility: hidden;
+
+        left: 0;
+    }
+    
+    #navigation-overlay
+    {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        background-color: rgba( 0, 0, 0, 1 );
+
+        opacity: 0;
+
+        transition: 0.4s;
+
+        z-index: 4;
+    }
+
+    #navigation-overlay.mobile-visible
+    {
+        opacity: 0.5;
+    }
+
+    body.mobile-no-scroll
+    {
+        overflow: hidden;
     }
 }
