@@ -116,30 +116,87 @@ function toggleSidebar()
     {
         let helpButtonElement = document.querySelector( '#top-help-button' );
 
-         // when rock calculator was loaded, then init the rock calculator.
-        if( loadedPage.identifier === 'rock-calculator' )
+        switch( loadedPage.identifier )
         {
-            RockCalculator.init( materials, rockTypes );
-
-            // start tour after 3 second.
-            // but only when user has not seen it once.
-            if( parseInt( window.localStorage.getItem( 'tourVisited' ) ) !== 1 )
-            {
-                window.setTimeout( function()
+            // rock calculator was loaded, then init the rock calculator.
+            case 'rock-calculator':
+                // load rock types and materials
+                Promise.all([
+                    fetch( '/data/rock-types.json' ),
+                    fetch( '/data/materials.json' )
+                // parse response    
+                ]).then( ( responses ) =>
                 {
-                    initTour();
-                }, 3000 );
-            }
+                    // get JSON object from every fetch request
+                    return Promise.all( responses.map( ( response ) =>
+                    {
+                        return response.json();
+                    }));
+                // handle parsed response, init rock calculator  
+                }).then( ( data ) =>
+                {
+                    let rockTypes = data[ 0 ];
+                    let materials = data[ 1 ];
 
-            // show and set help link to Tour
-            helpButtonElement.setAttribute( 'onclick', 'initTour();' );
-            helpButtonElement.style.display = '';
-        }
-        // all other requested pages
-        else
-        {
-            // hide help link
-            helpButtonElement.style.display = 'none';
+                    RockCalculator.init( materials, rockTypes );
+
+                    // start tour after 3 second.
+                    // but only when user has not seen it once.
+                    if( parseInt( window.localStorage.getItem( 'tourVisited' ) ) !== 1 )
+                    {
+                        window.setTimeout( function()
+                        {
+                            initTour();
+                        }, 3000 );
+                    }
+                });
+
+                // show and set help link to Tour
+                helpButtonElement.setAttribute( 'onclick', 'initTour();' );
+                helpButtonElement.style.display = '';
+
+                break;
+            
+            // rock types page was loaded, then request rock types and show them.   
+            case 'rock-types':
+                // load rock types and materials
+                Promise.all([
+                    fetch( '/data/rock-types.json' ),
+                    fetch( '/data/materials.json' )
+                // parse response    
+                ]).then( ( responses ) =>
+                {
+                    // get JSON object from every fetch request
+                    return Promise.all( responses.map( ( response ) =>
+                    {
+                        return response.json();
+                    }));
+                // handle parsed response, init rock types overview  
+                }).then( ( data ) =>
+                {
+                    let rockTypes = data[ 0 ];
+                    let materials = data[ 1 ];
+
+                    RockTypesOverview.init( 
+                        rockTypes, 
+                        materials, 
+                        '#rock-types-search-input', 
+                        '#rock-types-container',
+                        '#rock-type-template',
+                        '#rock-type-content-entry-template',
+                        '/images/rock-types/'
+                    );
+                });
+                
+                // hide help link
+                helpButtonElement.style.display = 'none';
+
+                break;
+
+            // not specific requests    
+            default:
+                // hide help link
+                helpButtonElement.style.display = 'none';
         }
  
         // hide loader

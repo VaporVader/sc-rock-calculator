@@ -1,0 +1,37 @@
+<div class="block-desc-container">
+    <div class="block-desc-text">search rock types</div>
+</div>
+<div id="rock-types-search" class="grid">
+    <div class="grid-element full">
+        <div class="icon-input with-unit">
+            <input id="rock-types-search-input" name="rock-types-search-input" type="text" placeholder="Search deposit name, materials, locations..." />
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+
+<div id="rock-types-container" class="rock-type-overview"><!-- Rock types render area --></div>
+
+<template id="rock-type-template">
+    <div class="rock-type-entry">
+        <div class="headline"><!-- ROCK TYPE NAME --></div>
+
+        <div class="info-grid">
+            <div class="rock-type-image grid-element">
+                <img src="" />
+            </div>
+
+            <div class="rock-type-content grid-element"><!-- ROCK TYPE CONTENT --></div>
+        </div>
+    </div>
+</template>
+
+<template id="rock-type-content-entry-template">
+    <div class="rock-content-entry">
+        <div class="material-text"><!-- ROCK CONTENT ENTRY NAME / PRICE -->></div>
+        <div class="bar">
+            <div class="fill" style="width: 0%; margin-left: 0%;"></div>
+            <div class="min-max-text" style="left: 0%;"><!-- ROCK CONTENT ENTRY MIN / MAX --></div>
+        </div>
+    </div>
+</template>
