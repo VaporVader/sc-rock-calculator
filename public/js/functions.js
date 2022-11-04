@@ -138,7 +138,12 @@ function toggleSidebar()
                     let rockTypes = data[ 0 ];
                     let materials = data[ 1 ];
 
-                    RockCalculator.init( materials, rockTypes );
+                    RockTypeService.materials = materials;
+                    RockTypeService.rockTypeTemplateSelector = '#rockTypeTemplate';
+                    RockTypeService.rockTypeContentEntryTemplateSelector = '#rockTypeContentEntryTemplate';
+                    RockTypeService.rockTypeImagePath = '/images/rock-types/';
+
+                    RockCalculator.init( materials, rockTypes, RockTypeService );
 
                     // start tour after 3 second.
                     // but only when user has not seen it once.
@@ -177,15 +182,12 @@ function toggleSidebar()
                     let rockTypes = data[ 0 ];
                     let materials = data[ 1 ];
 
-                    RockTypesOverview.init( 
-                        rockTypes, 
-                        materials, 
-                        '#rock-types-search-input', 
-                        '#rock-types-container',
-                        '#rock-type-template',
-                        '#rock-type-content-entry-template',
-                        '/images/rock-types/'
-                    );
+                    RockTypeService.materials = materials;
+                    RockTypeService.rockTypeTemplateSelector = '#rock-type-template';
+                    RockTypeService.rockTypeContentEntryTemplateSelector = '#rock-type-content-entry-template';
+                    RockTypeService.rockTypeImagePath = '/images/rock-types/';
+
+                    RockTypesOverview.init( rockTypes, RockTypeService );
                 });
                 
                 // hide help link
