@@ -213,6 +213,11 @@ h1,
     text-align: center;
 }
 
+.headline .headline-text
+{
+    margin-right: 5px;
+}
+
 .sub-page .content-container h1
 {
     text-align: left;
@@ -611,7 +616,7 @@ input[readonly]::placeholder
     font-weight: bold;
     text-align: left;
 
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 .rock-type-overview .rock-type-content
@@ -673,4 +678,41 @@ input[readonly]::placeholder
 {
     position: absolute;
     left: 0;
+}
+
+/* Tags */
+.tag
+{
+    display: inline-block;
+
+    padding: 3px 5px;
+
+    margin-left: 7px;
+    margin-right: 7px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+
+    background-color: #188bdf;
+    color: rgba( 0, 0, 0, 0.9 );
+
+    font-weight: bold;
+
+    border-radius: 3px;
+
+    font-size: 12px;
+}
+
+/* Location Styles & Tags */
+.rock-type-locations
+{
+    display:inline;
+
+    position: relative;
+    top: -2px;
+}
+
+.tag.location
+{
+    margin-right: 7px;
+    margin-left: 0;
 }

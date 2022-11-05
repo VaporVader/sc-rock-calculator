@@ -21,14 +21,14 @@ const RockTypeService =
         let newRockTypeInfoElement = rockTypeTemplate.content.cloneNode( true );
 
         // add rock type data to info element
-        let headlineElement         = newRockTypeInfoElement.querySelector( '.headline' );
+        let headlineElement         = newRockTypeInfoElement.querySelector( '.headline-text' );
         let rockTypeImageElement    = newRockTypeInfoElement.querySelector( '.rock-type-image img' );
         let rockTypeContentElement  = newRockTypeInfoElement.querySelector( '.rock-type-content' );
 
         headlineElement.textContent = rockTypeData.name;
         rockTypeImageElement.src    = this.rockTypeImagePath + rockTypeData.image;
 
-        // add rock type content
+        // add rock type content, materials
         for( let materialName in rockTypeData.content )
         {
             let rockTypeMaterialData        = rockTypeData.content[ materialName ];
@@ -57,6 +57,37 @@ const RockTypeService =
 
             // append material data to rock type content element
             rockTypeContentElement.append( newRockTypeContentElement );
+        }
+
+        // add rock type locations
+        let rockTypeLocationsElement = newRockTypeInfoElement.querySelector( '.rock-type-locations' );
+
+        if( rockTypeData.locations !== undefined )
+        {
+            let locationsCount = 0;
+
+            for( let systemName in rockTypeData.locations )
+            {
+                let locations = rockTypeData.locations[ systemName ];
+
+                locations.forEach( ( location ) =>
+                {
+                    let locationTagElement = document.createElement( 'div' );
+
+                    locationTagElement.classList.add( 'tag' );
+                    locationTagElement.classList.add( 'location' );
+                    locationTagElement.textContent = location;
+
+                    rockTypeLocationsElement.append( locationTagElement );
+
+                    locationsCount++;
+                });
+            }
+
+            if( locationsCount > 0 )
+            {
+                rockTypeLocationsElement.style.display = '';
+            }
         }
 
         return newRockTypeInfoElement;

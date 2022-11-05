@@ -137,14 +137,17 @@
 
     <template id="rockTypeTemplate">
         <div class="rock-type-entry">
-            <div class="headline"><!-- ROCK TYPE NAME --></div>
+            <div class="headline">
+                <span class="headline-text"><!-- ROCK TYPE NAME --></span>
+                <div class="rock-type-locations" style="display: none;"><!-- ROCK TYPE LOCATIONS --></div>
+            </div>
 
             <div class="info-grid">
                 <div class="rock-type-image grid-element">
                     <img src="" />
                 </div>
 
-                <div class="rock-type-content grid-element"><!-- ROCK TYPE CONTENT --></div>
+                <div class="rock-type-content no-locations grid-element"><!-- ROCK TYPE CONTENT --></div>
 
                 <div class="rock-type-select-button grid-element full">
                     <div class="button with-icon" onclick="closeRockTypeInfo();">
