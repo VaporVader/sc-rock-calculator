@@ -328,6 +328,11 @@ select
     font-weight: bold;
 }
 
+input[type="checkbox"]
+{
+    margin-right: 3px;
+}
+
 .icon-input
 {
     position: relative;

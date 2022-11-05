@@ -3,6 +3,7 @@ let RockTypesOverview =
     RockTypeService                 : null,
     rockTypes                       : null,
     searchInputElement              : null,
+    strictSearchCheckElement        : null,
     renderAreaElement               : null,
 
     /**
@@ -15,10 +16,11 @@ let RockTypesOverview =
      */
     init: function( rockTypes, RockTypeService )
     {
-        this.rockTypes          = rockTypes;
-        this.RockTypeService    = RockTypeService;
-        this.searchInputElement = document.querySelector( '#rock-types-search-input' );
-        this.renderAreaElement  = document.querySelector( '#rock-types-container' );
+        this.rockTypes                  = rockTypes;
+        this.RockTypeService            = RockTypeService;
+        this.searchInputElement         = document.querySelector( '#rock-types-search-input' );
+        this.strictSearchCheckElement   = document.querySelector( '#rock-types-strict-search' );
+        this.renderAreaElement          = document.querySelector( '#rock-types-container' );
 
         this.render();
         this._initSearchHandler();
@@ -68,19 +70,25 @@ let RockTypesOverview =
             {
                 // every search value must match
                 case 'AND':
-                    searchResult = searchValues.every( ( searchValue ) =>
+                    if( searchValues.length > 0 )
                     {
-                        return rockTypeSearchString.includes( searchValue.toLowerCase() );
-                    });
+                        searchResult = searchValues.every( ( searchValue ) =>
+                        {
+                            return rockTypeSearchString.includes( searchValue.toLowerCase() );
+                        });
+                    }
 
                     break;
 
                 // one search value must match    
                 case 'OR':
-                    searchResult = searchValues.some( ( searchValue ) =>
+                    if( searchValues.length > 0 )
                     {
-                        return rockTypeSearchString.includes( searchValue.toLowerCase() );
-                    });
+                        searchResult = searchValues.some( ( searchValue ) =>
+                        {
+                            return rockTypeSearchString.includes( searchValue.toLowerCase() );
+                        });
+                    }
 
                     break;    
             }
@@ -149,34 +157,50 @@ let RockTypesOverview =
     _initSearchHandler: function()
     {
         let self = this;
-        let timedSearchEvent = null;
 
+        // when user changed search input field
         [ 'keyup', 'change' ].forEach( ( event ) => 
         {
             this.searchInputElement.addEventListener( event, function()
             {
-                let searchValue = self.searchInputElement.value;
-
-                // split search input to multiple strings by comma
-                let searchValues = searchValue.split( ',' );
-
-                // remove whitespaces at start and end from searchValues
-                searchValues = searchValues.map( ( searchValue ) =>
-                {
-                    return searchValue.trim();
-                });
-
-                if( timedSearchEvent !== null )
-                {
-                    clearTimeout( timedSearchEvent );
-                }
-
-                timedSearchEvent = window.setTimeout( function()
-                {
-                    self.search( searchValues, 'AND' );
-                }, 200 );
-
+                self._fireSearchEvent();
             }, false);
         });
+
+        // when user changed strict search mode
+        this.strictSearchCheckElement.addEventListener( 'change', function()
+        {
+            self._fireSearchEvent();
+        }, false );
+    },
+
+    /**
+     * Read search input and search mode and fire search processing.
+     */
+    _fireSearchEvent()
+    {
+        let self = this;
+        let timedSearchEvent = null;
+        let searchValue = this.searchInputElement.value;
+        let searchOperator = ( this.strictSearchCheckElement.checked ) ? 'AND' : 'OR';
+
+        // split search input to multiple strings by comma
+        let searchValues = searchValue.split( ',' );
+
+        // remove whitespaces at start and end from searchValues
+        searchValues = searchValues.map( ( searchValue ) =>
+        {
+            return searchValue.trim();
+        });
+
+        if( timedSearchEvent !== null )
+        {
+            clearTimeout( timedSearchEvent );
+        }
+
+        timedSearchEvent = window.setTimeout( function()
+        {
+            self.search( searchValues, searchOperator );
+        }, 250 );
     }
 }
