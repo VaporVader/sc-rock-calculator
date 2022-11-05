@@ -4,16 +4,20 @@
 <div id="rock-types-search" class="grid">
     <div class="grid-element full">
         <div class="icon-input with-unit">
-            <input id="rock-types-search-input" name="rock-types-search-input" type="text" placeholder="Search deposit name, materials, locations..." />
+            <input id="rock-types-search-input" name="rock-types-search-input" type="text" placeholder="Search deposit name, materials, locations..." spellcheck="false" />
             <i class="fa fa-search" aria-hidden="true"></i>
         </div>
     </div>
 </div>
 
+<div id="nothing-found" style="display: none;">
+    <span>No matching rock type found.</span>
+</div>
+
 <div id="rock-types-container" class="rock-type-overview"><!-- Rock types render area --></div>
 
 <template id="rock-type-template">
-    <div class="rock-type-entry">
+    <div class="rock-type-entry" data-search="">
         <div class="headline">
             <span class="headline-text"><!-- ROCK TYPE NAME --></span>
             <div class="rock-type-locations" style="display: none;"><!-- ROCK TYPE LOCATIONS --></div>

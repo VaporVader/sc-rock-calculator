@@ -14,6 +14,8 @@ const RockTypeService =
      */
     getRockTypeInfoElement: function( rockTypeData )
     {
+        let searchStrings = [];
+
         let rockTypeTemplate = document.querySelector( this.rockTypeTemplateSelector );
         let rockTypeContentEntryTemplate = document.querySelector( this.rockTypeContentEntryTemplateSelector );
 
@@ -28,6 +30,8 @@ const RockTypeService =
         headlineElement.textContent = rockTypeData.name;
         rockTypeImageElement.src    = this.rockTypeImagePath + rockTypeData.image;
 
+        searchStrings.push( rockTypeData.name );
+
         // add rock type content, materials
         for( let materialName in rockTypeData.content )
         {
@@ -37,6 +41,9 @@ const RockTypeService =
             // get basic material data
             let basicMaterialData   = this.materials[ materialName ];
             let materialPricePerSCU = Math.round( basicMaterialData.price.refined * 100 );
+
+            // Add material name to searchable strings
+            searchStrings.push( materialName );
 
             // add material data
             let materialTextElement    = newRockTypeContentElement.querySelector( '.material-text' );
@@ -68,6 +75,8 @@ const RockTypeService =
 
             for( let systemName in rockTypeData.locations )
             {
+                searchStrings.push( systemName );
+
                 let locations = rockTypeData.locations[ systemName ];
 
                 locations.forEach( ( location ) =>
@@ -80,6 +89,9 @@ const RockTypeService =
 
                     rockTypeLocationsElement.append( locationTagElement );
 
+                    // Add location name to searchable strings
+                    searchStrings.push( location );
+
                     locationsCount++;
                 });
             }
@@ -89,6 +101,10 @@ const RockTypeService =
                 rockTypeLocationsElement.style.display = '';
             }
         }
+
+        // add searchable strings for this rock type as dataset
+        // to set dataset search we must get the outer parent as element, not as document fragment
+        newRockTypeInfoElement.querySelector( '.headline' ).parentNode.dataset.search = searchStrings.join( ',' );
 
         return newRockTypeInfoElement;
     }

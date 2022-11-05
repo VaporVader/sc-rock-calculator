@@ -158,7 +158,8 @@ i.red-icon
     width: 540px;
 }
 
-.sub-page .content-container
+.sub-page .content-container,
+#nothing-found
 {
     background-color: rgba(141, 180, 224, 0.2);
 
