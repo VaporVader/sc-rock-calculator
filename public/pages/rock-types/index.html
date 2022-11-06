@@ -1,0 +1,49 @@
+<div class="block-desc-container">
+    <div class="block-desc-text">search rock types</div>
+</div>
+<div id="rock-types-search" class="grid">
+    <div class="grid-element full">
+        <div class="icon-input">
+            <input id="rock-types-search-input" name="rock-types-search-input" type="search" placeholder="Search deposit name, materials, locations..." spellcheck="false" />
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+
+    <div class="grid-element full">
+        <input id="rock-types-strict-search" name="rock-types-strict-search" type="checkbox" value="1" checked />
+        <label for="rock-types-strict-search">Strict search - All search terms must be included</label>
+    </div>
+</div>
+
+<div id="nothing-found" style="display: none;">
+    <span>No matching rock type found.</span>
+</div>
+
+<div id="rock-types-container" class="rock-type-overview"><!-- Rock types render area --></div>
+
+<template id="rock-type-template">
+    <div class="rock-type-entry" data-search="">
+        <div class="headline">
+            <span class="headline-text"><!-- ROCK TYPE NAME --></span>
+            <div class="rock-type-locations" style="display: none;"><!-- ROCK TYPE LOCATIONS --></div>
+        </div>
+
+        <div class="info-grid">
+            <div class="rock-type-image grid-element">
+                <img src="" />
+            </div>
+
+            <div class="rock-type-content grid-element"><!-- ROCK TYPE CONTENT --></div>
+        </div>
+    </div>
+</template>
+
+<template id="rock-type-content-entry-template">
+    <div class="rock-content-entry">
+        <div class="material-text"><!-- ROCK CONTENT ENTRY NAME / PRICE -->></div>
+        <div class="bar">
+            <div class="fill" style="width: 0%; margin-left: 0%;"></div>
+            <div class="min-max-text" style="left: 0%;"><!-- ROCK CONTENT ENTRY MIN / MAX --></div>
+        </div>
+    </div>
+</template>
