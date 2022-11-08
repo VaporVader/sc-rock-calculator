@@ -727,7 +727,8 @@ input[readonly]::placeholder
 /* Location Styles & Tags */
 .rock-type-locations
 {
-    display:inline;
+    display:block;
+    margin-bottom: 10px;
 }
 
 .tag.location
