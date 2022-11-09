@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div id="calculator-rock-type-overview" style="display: none;"><!-- ROCK TYPE OVERVIEW RENDER AREA --></div>
+        <div id="calculator-rock-type-overview" class="rock-type-overview" style="display: none;"><!-- ROCK TYPE OVERVIEW RENDER AREA --></div>
 
         <div class="block-desc-container">
             <div class="block-desc-text">rock data</div>
@@ -136,15 +136,19 @@
     </template>
 
     <template id="rockTypeTemplate">
-        <div class="rock-type-entry">
-            <div class="headline"><!-- ROCK TYPE NAME --></div>
+        <div class="rock-type-entry" data-search="">
+            <div class="headline">
+                <span class="headline-text"><!-- ROCK TYPE NAME --></span>
+            </div>
+
+            <div class="rock-type-locations" style="display: none;"><!-- ROCK TYPE LOCATIONS --></div>
 
             <div class="info-grid">
                 <div class="rock-type-image grid-element">
                     <img src="" />
                 </div>
 
-                <div class="rock-type-content grid-element"><!-- ROCK TYPE CONTENT --></div>
+                <div class="rock-type-content no-locations grid-element"><!-- ROCK TYPE CONTENT --></div>
 
                 <div class="rock-type-select-button grid-element full">
                     <div class="button with-icon" onclick="closeRockTypeInfo();">

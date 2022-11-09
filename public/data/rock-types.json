@@ -1,0 +1,537 @@
+{
+   "Asteroids": [
+      {
+         "name": "C-Type Asteroid",
+         "content": {
+            "Aluminium": {
+               "min": 2.0,
+               "max": 30.0
+            },
+            "Laranite": {
+               "min": 2.0,
+               "max": 20.0
+            },
+            "Quantanium": {
+               "min": 1.0,
+               "max": 20.0
+            }
+         },
+         "image": "asteroid-ctype.png",
+         "locations": {
+            "Stanton": [ 
+               "ARC-L5" 
+            ]
+         }
+      },
+      {
+         "name": "E-Type Asteroid",
+         "content": {
+            "Borase": {
+               "min": 1.2,
+               "max": 20.0
+            },
+            "Corundum": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Diamond": {
+               "min": 1.0,
+               "max": 30.0
+            },
+            "Gold": {
+               "min": 2.0,
+               "max": 20.0
+            }
+         },
+         "image": "asteroid-etype.png",
+         "locations": {
+            "Stanton": [ 
+               "CRU-L5",
+               "CRU-L4",
+               "ARC-L4",
+               "HUR-L2",
+               "HUR-L1",
+               "HUR-L4",
+               "ARC-L1",
+               "Aaron Halo",
+               "Crusader > Yela Ring"
+            ]
+         }
+      },
+      {
+         "name": "M-Type Asteroid",
+         "content": {
+            "Hephaestanite": {
+               "min": 1.1,
+               "max": 20.0
+            },
+            "Laranite": {
+               "min": 1.2,
+               "max": 30.0
+            },
+            "Tungsten": {
+               "min": 3.0,
+               "max": 45.0
+            }
+         },
+         "image": "asteroid-mtype.png",
+         "locations": {
+            "Stanton": [ 
+               "Aaron Halo",
+               "Crusader > Yela Ring",
+               "HUR-L5",
+               "HUR-L3",
+               "ARC-L3",
+               "CRU-L3"
+            ]
+         }
+      },
+      {
+         "name": "P-Type Asteroid",
+         "content": {
+            "Aluminium": {
+               "min": 3.0,
+               "max": 55.0
+            },
+            "Bexalite": {
+               "min": 1.1,
+               "max": 20.0
+            },
+            "Corundum": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Diamond": {
+               "min": 1.15,
+               "max": 35.0
+            },
+            "Titanium": {
+               "min": 5.0,
+               "max": 30.0
+            }
+         },
+         "image": "asteroid-ptype.png",
+         "locations": {
+            "Stanton": [ 
+               "CRU-L4",
+               "ARC-L4",
+               "HUR-L2",
+               "HUR-L4",
+               "ARC-L1",
+               "Aaron Halo",
+               "Crusader > Yela Ring",
+               "ARC-L2",
+               "ARC-L5"
+            ]
+         }
+      },
+      {
+         "name": "Q-Type Asteroid",
+         "content": {
+            "Beryl": {
+               "min": 1.5,
+               "max": 30.0
+            },
+            "Borase": {
+               "min": 1.12,
+               "max": 15.0
+            },
+            "Quantanium": {
+               "min": 2.1,
+               "max": 50.0
+            },
+            "Quartz": {
+               "min": 20.0,
+               "max": 40.0
+            }
+         },
+         "image": "asteroid-qtype.png",
+         "locations": {
+            "Stanton": [ 
+               "Aaron Halo",
+               "Crusader > Yela Ring",
+               "HUR-L3",
+               "ARC-L3",
+               "CRU-L3"
+            ]
+         }
+      },
+      {
+         "name": "S-Type Asteroid",
+         "content": {
+            "Borase": {
+               "min": 1.0,
+               "max": 20.0
+            },
+            "Copper": {
+               "min": 2.0,
+               "max": 20.0
+            },
+            "Titanium": {
+               "min": 1.0,
+               "max": 30.0
+            }
+         },
+         "image": "asteroid-stype.png",
+         "locations": {
+            "Stanton": [ 
+               "CRU-L5",
+               "CRU-L1",
+               "HUR-L1",
+               "ARC-L2",
+               "HUR-L5",
+               "ARC-L5"
+            ]
+         }
+      }
+   ],
+   "Deposits": [
+      {
+         "name": "Atacamite Deposit",
+         "content": {
+            "Agricium": {
+               "min": 1.0,
+               "max": 15.0
+            },
+            "Beryl": {
+               "min": 3.0,
+               "max": 40.0
+            },
+            "Diamond": {
+               "min": 2.0,
+               "max": 40.0
+            },
+            "Quartz": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Taranite": {
+               "min": 1.16,
+               "max": 20.0
+            }
+         },
+         "image": "atacamite.png",
+         "locations": {
+            "Stanton": [ 
+               "ArcCorp > Wala"
+            ]
+         }
+      },
+      {
+         "name": "Felsic Deposit",
+         "content": {
+            "Agricium": {
+               "min": 1.0,
+               "max": 15.0
+            },
+            "Beryl": {
+               "min": 3.0,
+               "max": 40.0
+            },
+            "Diamond": {
+               "min": 2.0,
+               "max": 40.0
+            },
+            "Quartz": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Taranite": {
+               "min": 1.16,
+               "max": 20.0
+            }
+         },
+         "image": "felsic.png",
+         "locations": {
+            "Stanton": [ 
+               "Hurston > Arial"
+            ]
+         }
+      },
+      {
+         "name": "Gneiss Deposit",
+         "content": {
+            "Agricium": {
+               "min": 2.0,
+               "max": 30.0
+            },
+            "Aluminium": {
+               "min": 3.0,
+               "max": 65.0
+            },
+            "Beryl": {
+               "min": 2.0,
+               "max": 20.0
+            },
+            "Diamond": {
+               "min": 1.0,
+               "max": 20.0
+            },
+            "Taranite": {
+               "min": 1.0,
+               "max": 30.0
+            },
+            "Tungsten": {
+               "min": 2.0,
+               "max": 40.0
+            }
+         },
+         "image": "gneiss.png",
+         "locations": {
+            "Stanton": [ 
+               "Hurston > Aberdeen",
+               "Hurston > Arial",
+               "Crusader > Daymar",
+               "Hurston > Ita",
+               "MicroTech",
+               "MicroTech > Clio",
+               "MicroTech > Calliope",
+               "MicroTech > Euterpe",
+               "ArcCorp > Lyria"
+            ]
+         }
+      },
+      {
+         "name": "Granite Deposit",
+         "content": {
+            "Agricium": {
+               "min": 2.0,
+               "max": 30.0
+            },
+            "Copper": {
+               "min": 3.0,
+               "max": 35.0
+            },
+            "Corundum": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Diamond": {
+               "min": 3.0,
+               "max": 30.0
+            },
+            "Laranite": {
+               "min": 2.0,
+               "max": 30.0
+            },
+            "Tungsten": {
+               "min": 3.0,
+               "max": 45.0
+            }
+         },
+         "image": "granite.png",
+         "locations": {
+            "Stanton": [ 
+               "Crusader > Cellin",
+               "Crusader > Yela",
+               "Hurston > Aberdeen",
+               "MicroTech",
+               "MicroTech > Clio",
+               "MicroTech > Calliope",
+               "MicroTech > Euterpe",
+               "ArcCorp > Lyria"
+            ]
+         }
+      },
+      {
+         "name": "Igneous Deposit",
+         "content": {
+            "Copper": {
+               "min": 2.0,
+               "max": 35.0
+            },
+            "Gold": {
+               "min": 2.0,
+               "max": 35.0
+            },
+            "Taranite": {
+               "min": 3.0,
+               "max": 30.0
+            },
+            "Titanium": {
+               "min": 2.0,
+               "max": 35.0
+            },
+            "Tungsten": {
+               "min": 3.0,
+               "max": 40.0
+            }
+         },
+         "image": "igneous.png",
+         "locations": {
+            "Stanton": [ 
+               "Hurston > Ita",
+               "Hurston > Arial",
+               "Hurston > Magda",
+               "Crusader > Cellin",
+               "MicroTech",
+               "MicroTech > Clio",
+               "MicroTech > Calliope",
+               "MicroTech > Euterpe",
+               "ArcCorp > Wala"
+            ]
+         }
+      },
+      {
+         "name": "Obsidian Deposit",
+         "content": {
+            "Beryl": {
+               "min": 2.0,
+               "max": 40.0
+            },
+            "Bexalite": {
+               "min": 3.0,
+               "max": 30.0
+            },
+            "Corundum": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Diamond": {
+               "min": 2.0,
+               "max": 35.0
+            },
+            "Hephaestanite": {
+               "min": 3.0,
+               "max": 30.0
+            }
+         },
+         "image": "obsidian.png",
+         "locations": {
+            "Stanton": [ 
+               "Crusader > Daymar",
+               "Hurston > Aberdeen",
+               "Hurston > Ita",
+               "Hurston > Magda",
+               "MicroTech",
+               "MicroTech > Clio",
+               "MicroTech > Calliope",
+               "MicroTech > Euterpe",
+               "Crusader > Cellin",
+               "ArcCorp > Lyria"
+            ]
+         }
+      },
+      {
+         "name": "Quantanium Deposit",
+         "content": {
+            "Aluminium": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Beryl": {
+               "min": 2.0,
+               "max": 40.0
+            },
+            "Borase": {
+               "min": 1.0,
+               "max": 15.0
+            },
+            "Quantanium": {
+               "min": 2.1,
+               "max": 50.0
+            },
+            "Quartz": {
+               "min": 20.0,
+               "max": 60.0
+            }
+         },
+         "image": "quantanium.png",
+         "locations": {
+            "Stanton": [ 
+               "MicroTech > Clio",
+               "MicroTech > Calliope",
+               "MicroTech > Euterpe",
+               "ArcCorp > Lyria",
+               "ArcCorp > Wala",
+               "Crusader > Cellin",
+               "Crusader > Daymar",
+               "Crusader > Yela"
+            ]
+         }
+      },
+      {
+         "name": "Quartzite Deposit",
+         "content": {
+            "Beryl": {
+               "min": 2.0,
+               "max": 40.0
+            },
+            "Copper": {
+               "min": 2.0,
+               "max": 30.0
+            },
+            "Diamond": {
+               "min": 2.0,
+               "max": 40.0
+            },
+            "Gold": {
+               "min": 2.0,
+               "max": 30.0
+            },
+            "Quartz": {
+               "min": 20.0,
+               "max": 65.0
+            },
+            "Taranite": {
+               "min": 1.0,
+               "max": 15.0
+            }
+         },
+         "image": "quartzite.png",
+         "locations": {
+            "Stanton": [ 
+               "Hurston > Magda",
+               "Hurston > Arial",
+               "Hurston > Ita",
+               "Crusader > Daymar",
+               "Crusader > Yela",
+               "MicroTech",
+               "MicroTech > Clio",
+               "MicroTech > Calliope",
+               "MicroTech > Euterpe",
+               "Crusader > Cellin"
+            ]
+         }
+      },
+      {
+         "name": "Shale Deposit",
+         "content": {
+            "Agricium": {
+               "min": 2.0,
+               "max": 30.0
+            },
+            "Aluminium": {
+               "min": 3.0,
+               "max": 50.0
+            },
+            "Gold": {
+               "min": 2.0,
+               "max": 35.0
+            },
+            "Laranite": {
+               "min": 2.0,
+               "max": 20.0
+            },
+            "Titanium": {
+               "min": 2.0,
+               "max": 35.0
+            }
+         },
+         "image": "shale.png",
+         "locations": {
+            "Stanton": [ 
+               "Crusader > Yela",
+               "Crusader > Daymar",
+               "Hurston > Magda",
+               "Hurston > Aberdeen",
+               "MicroTech",
+               "MicroTech > Clio",
+               "MicroTech > Calliope",
+               "MicroTech > Euterpe",
+               "ArcCorp > Wala"
+            ]
+         }
+      }
+   ]
+}
