@@ -214,9 +214,25 @@ h1,
     text-align: center;
 }
 
+.headline.flex
+{
+    display: flex;
+    align-items: center;
+}
+
 .headline .headline-text
 {
     margin-right: 5px;
+}
+
+.headline.flex .headline-text
+{
+    white-space: nowrap;
+
+    margin-right: 8px;
+
+    position: relative;
+    top: -1px;
 }
 
 .sub-page .content-container h1
@@ -711,10 +727,8 @@ input[readonly]::placeholder
 /* Location Styles & Tags */
 .rock-type-locations
 {
-    display:inline;
-
-    position: relative;
-    top: -2px;
+    display:block;
+    margin-bottom: 10px;
 }
 
 .tag.location
