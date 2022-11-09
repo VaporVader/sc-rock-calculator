@@ -352,7 +352,7 @@ function toggleSidebar()
     Tour.addStep({
         elementSelector : '#calculator-rock-type-overview',
         headline        : 'Rock type information',
-        description     : 'Here you can view the currently available information on the rock type, such as the material composition or an example image of the rock type.<br /><br />The known locations for each rock type are sorted by probability.'
+        description     : 'Here you can view the currently available information on the rock type, such as the material composition or an example image of the rock type.'
     });
 
     Tour.addStep({
